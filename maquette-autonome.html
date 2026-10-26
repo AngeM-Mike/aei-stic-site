@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AEI STIC — Maquette du site</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#fff;--ink:#2b1512;--mut:#75666a;--soft:#f5f3f3;--line:rgba(43,21,18,.1);--coral:#4aa8ff;--peach:#a9dcff;--tint:#e3f2ff;--grad:linear-gradient(135deg,#4aa8ff,#1f7aea);--dark:#2b1512;--sh:0 14px 36px rgba(43,21,18,.08);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:#fff;color:var(--ink);font:400 16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:Sora,Inter,sans-serif;line-height:1.12;margin:0;letter-spacing:-.025em}
+h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:700}h2{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:600}h3{font-size:1.08rem;font-weight:600}
+p{margin:0;max-width:60ch}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--coral);outline-offset:3px}
+.wrap{width:min(1120px,100% - 40px);margin:0 auto}
+.mark{background:var(--tint);padding:0 .2em;border-radius:.28em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.sub{color:var(--mut)}.c{text-align:center;justify-items:center}
+nav{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:0;right:0;z-index:30;display:flex;justify-content:center;pointer-events:none}
+.pill{pointer-events:auto;display:flex;align-items:center;gap:6px;padding:7px 8px 7px 12px;border-radius:99px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:var(--sh)}
+.brand{display:flex;align-items:center;gap:9px;font:700 .95rem Sora;background:none;border:0;padding:0 10px 0 0}.brand img{width:34px;height:34px;border-radius:50%}
+.links{display:flex;gap:2px}.links button{background:none;border:0;padding:9px 15px;border-radius:99px;font-size:.88rem;font-weight:500;color:var(--mut);transition:.25s}
+.links button:hover{color:var(--ink)}.links button.on{background:var(--ink);color:#fff}
+.burger{display:none;background:var(--soft);border:0;border-radius:99px;width:40px;height:40px}
+@media(max-width:860px){.burger{display:block}.links{position:absolute;top:62px;left:20px;right:20px;flex-direction:column;background:#fff;border:1px solid var(--line);box-shadow:var(--sh);border-radius:22px;padding:8px;opacity:0;visibility:hidden;transform:translateY(-6px);transition:.25s}.links.open{opacity:1;visibility:visible;transform:none}.links button{text-align:left}.pill{justify-content:space-between;width:calc(100% - 40px)}}
+main{padding-top:100px}
+.page{animation:fade .45s ease both}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+section{padding:40px 0}
+.head{margin-bottom:28px;display:grid;gap:10px}
+.badge{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 11px;border-radius:99px;background:var(--tint);color:#5b3a31;width:fit-content}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:8px 8px 8px 22px;border-radius:99px;border:1px solid var(--line);background:#fff;font-weight:600;font-size:.92rem;transition:transform .25s,box-shadow .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--sh)}
+.btn .ar{width:34px;height:34px;border-radius:50%;background:var(--grad);color:var(--ink);display:grid;place-items:center}
+.btn.p{background:var(--ink);color:#fff;border:0}.btn.g{background:var(--grad);color:var(--ink);border:0}.btn.g .ar{background:var(--ink);color:#fff}
+.btn.o{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .65s ease,transform .65s ease}.reveal.in{opacity:1;transform:none}
+/* cadres photo */
+.pic{position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#f4ece9,#fbe6da);width:100%}
+.pic::before{content:"";position:absolute;inset:10px;border:2px dashed rgba(238,127,134,.45);border-radius:16px;pointer-events:none;z-index:1}
+.pic svg.mo{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;transition:transform .8s ease}
+.pic.has::before{display:none}
+.ph{position:absolute;left:18px;top:18px;z-index:3;display:flex;align-items:center;gap:7px;background:#fff;border-radius:99px;padding:5px 12px 5px 9px;font-size:.72rem;font-weight:600;box-shadow:0 4px 14px rgba(43,21,18,.08);max-width:calc(100% - 36px)}
+.ph span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ph svg{flex:none;color:var(--coral)}
+.zoom:hover .pic img{transform:scale(1.05)}
+.fill{height:100%;min-height:260px}
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:20px 0 10px}
+.hero .txt{display:grid;gap:24px}
+.hp{position:relative}
+.chip{position:absolute;z-index:5;background:#fff;border-radius:18px;padding:12px 16px;box-shadow:var(--sh);display:flex;align-items:center;gap:12px;font-size:.84rem;animation:bob 7s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-5px)}}
+.chip b{display:block;font:600 .95rem Sora}.chip i{width:38px;height:38px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-style:normal}
+.chip.a{left:-26px;top:46px}.chip.b{right:14px;bottom:-16px;animation-delay:-3s}
+@media(max-width:860px){.hero{grid-template-columns:1fr}.chip.a{left:8px}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:34px}
+.stat{text-align:center;padding:8px 16px;border-right:1px solid var(--line)}.stat:last-child{border:0}
+.stat b{display:block;font:700 clamp(2rem,4.5vw,3.2rem)/1.1 Sora}.stat span{font-size:.88rem;color:var(--mut)}
+/* bande photo */
+.band{position:relative;border-radius:36px;overflow:hidden;padding:clamp(32px,6vw,70px) clamp(16px,4vw,50px);display:grid;gap:30px;justify-items:center;text-align:center;color:#fff;isolation:isolate}
+.band>.pic{position:absolute;inset:0;border-radius:0;z-index:-2;height:100%}.band::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(43,21,18,.35),rgba(43,21,18,.65));z-index:-1}
+.band h2{color:#fff}.band .sub{color:rgba(255,255,255,.85)}
+.wc{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;text-align:left;margin-top:30px}
+.wcd{background:#fff;color:var(--ink);border-radius:26px;padding:24px;display:grid;gap:10px;align-content:start}
+.wcd .ic{width:48px;height:48px;border-radius:50%;background:var(--grad);display:grid;place-items:center}
+.wcd .btn{justify-self:start;margin-top:6px;padding:6px 6px 6px 16px;font-size:.84rem}.wcd .ar{width:28px;height:28px}
+@media(max-width:860px){.wc{grid-template-columns:1fr}}
+/* carte grise */
+.gcard{background:linear-gradient(135deg,#f7f6f6,#ebe9e9);border-radius:36px;padding:clamp(22px,4vw,44px);display:grid;grid-template-columns:.8fr 1.2fr;gap:36px;align-items:center}
+.gcard .pic{aspect-ratio:4/5}.play{position:absolute;left:14px;bottom:14px;z-index:4;width:48px;height:48px;border-radius:50%;background:var(--grad);display:grid;place-items:center;border:0;box-shadow:var(--sh)}
+.gcard ul{list-style:none;padding:0;margin:14px 0 22px;display:grid;gap:10px}.gcard li{display:flex;gap:10px;align-items:center}.gcard li i{width:26px;height:26px;border-radius:50%;background:var(--grad);display:grid;place-items:center;flex:none}
+@media(max-width:760px){.gcard{grid-template-columns:1fr}}
+/* cartes photo */
+.pc{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:3/4;display:block;width:100%;border:0;padding:0;text-align:left;background:var(--soft)}
+.pc .pic{position:absolute;inset:0;height:100%;border-radius:0}
+.lab{position:absolute;left:10px;right:10px;bottom:10px;z-index:5;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:20px;padding:12px 12px 12px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.lab small{display:block;font-size:.7rem;color:var(--mut)}.lab b{font:600 1rem Sora}
+.lab i{width:36px;height:36px;border-radius:50%;background:var(--grad);display:grid;place-items:center;flex:none;transition:transform .3s}.pc:hover .lab i{transform:rotate(45deg)}
+.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:start}.row4>:nth-child(even){margin-top:28px}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:960px){.row4{grid-template-columns:1fr 1fr}}@media(max-width:760px){.row3{grid-template-columns:1fr}.row4{grid-template-columns:1fr}.row4>:nth-child(even){margin-top:0}}
+/* cta sombre */
+.dcta{background:var(--dark);color:#fff;border-radius:40px;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;padding:clamp(26px,5vw,56px);overflow:hidden}
+.dcta h2{color:#fff;margin-bottom:12px}.dcta p{color:rgba(255,255,255,.7);margin-bottom:22px}
+.mc{background:var(--grad);color:var(--ink);border-radius:26px;padding:22px;aspect-ratio:1.6;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 24px 50px rgba(0,0,0,.35);transform:rotate(-3deg)}
+.mc img{width:44px;height:44px;border-radius:50%}.mc div{display:flex;justify-content:space-between;align-items:flex-start;font:600 .8rem Sora}
+@media(max-width:760px){.dcta{grid-template-columns:1fr;border-radius:30px}}
+/* onglets & accordéons */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tab{padding:10px 20px;border-radius:99px;border:1px solid var(--line);background:#fff;font-weight:500;transition:.25s}.tab:hover{border-color:var(--coral)}.tab.on{background:var(--ink);color:#fff;border-color:transparent}
+.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:30px;align-items:start}
+@media(max-width:760px){.split{grid-template-columns:1fr}}
+.vt{display:grid;gap:4px;border-left:2px solid var(--line)}
+.vt button{background:none;border:0;border-left:3px solid transparent;margin-left:-2px;text-align:left;padding:14px 20px;transition:.3s}
+.vt button h3{font-size:1.5rem;color:#b3b0af;transition:color .3s}.vt button.on{border-color:var(--ink)}.vt button.on h3{color:var(--ink)}
+.vt .bd{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s}.vt button.on .bd{grid-template-rows:1fr}.vt .bd>div{overflow:hidden}.vt .bd p{padding-top:8px;font-size:.92rem;color:var(--mut)}
+.tg{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.tg span{background:var(--soft);font-size:.78rem;padding:3px 11px;border-radius:99px;color:var(--ink)}
+.mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:200px 200px;gap:12px;animation:fade .45s ease both}.mosaic .pic{height:100%}.mosaic .t{grid-row:span 2;grid-column:2}
+@media(max-width:560px){.mosaic{grid-template-rows:150px 150px}}
+.acc{background:#fff;border:1px solid var(--line);border-radius:26px;overflow:hidden;transition:border-color .3s}.acc.open{border-color:var(--coral)}
+.acc>button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:20px 24px;background:none;border:0;text-align:left;font:600 1.05rem Sora}
+.pl{width:32px;height:32px;border-radius:50%;background:var(--soft);display:grid;place-items:center;transition:.3s;flex:none}.acc.open .pl{transform:rotate(45deg);background:var(--grad)}
+.ab{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s}.acc.open .ab{grid-template-rows:1fr}.ab>div{overflow:hidden}.ab p{padding:0 24px 22px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:s}.steps div{padding:24px;border-radius:26px;background:var(--soft)}
+.steps div::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--grad);font:700 .95rem Sora;margin-bottom:12px}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:28px;padding:10px;display:flex;flex-direction:column;gap:12px;text-align:left;transition:transform .35s,box-shadow .35s}
+.card:hover{transform:translateY(-4px);box-shadow:var(--sh)}.card.sel{border-color:var(--coral);box-shadow:var(--sh)}.card .tx{padding:2px 14px 14px;display:grid;gap:6px}
+.box{background:var(--soft);border-radius:30px;padding:clamp(22px,4vw,36px);display:grid;gap:12px;align-content:start}
+.box ul{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:8px}.box li{background:#fff;border-radius:16px;padding:11px 16px;font-size:.93rem}
+.frame{background:#fff;border:1px solid var(--line);border-radius:28px;padding:10px;box-shadow:var(--sh);animation:fade .5s ease both}
+.frame .tx{padding:16px 12px 12px;display:grid;gap:6px}.frame time{font-size:.8rem;font-weight:600;color:#c4606a}
+/* footer */
+footer{margin-top:110px;position:relative}
+.foot{background:var(--dark);color:#fff;border-radius:56px 56px 0 0;padding:90px clamp(24px,5vw,64px) 28px;position:relative}
+.foot .lg{z-index:2;position:absolute;top:-52px;left:50%;transform:translateX(-50%);width:104px;height:104px;border-radius:50%;border:8px solid #fff;background:var(--dark)}
+.foot .mo{position:absolute;inset:0;width:100%;height:100%;opacity:.07;pointer-events:none;clip-path:inset(0 round 56px 56px 0 0)}
+.fg{position:relative;display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:34px;align-items:start}
+.foot h4{font-size:1.15rem;margin-bottom:12px;color:var(--peach)}
+.foot a,.foot li{display:flex;align-items:center;gap:10px;font-size:.92rem;color:rgba(255,255,255,.85);padding:3px 0}.foot a:hover{color:#fff;text-decoration:underline}
+.foot ul{list-style:none;margin:0;padding:0}.foot li svg,.foot a svg{color:var(--coral);flex:none}
+.soc{display:grid;gap:4px;margin-top:18px}.soc a{justify-content:space-between;max-width:190px;border-bottom:1px solid rgba(255,255,255,.12)}
+.fc{text-align:center;display:grid;gap:16px;justify-items:center}.fc h3{font-size:2rem;color:#fff}.fc em{font:italic 1.1rem Georgia,serif;color:var(--peach)}
+.fc .cta{justify-content:center}
+.ql{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+.fb{position:relative;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:42px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);font-size:.8rem;color:rgba(255,255,255,.6)}
+.lp{display:flex;gap:16px;background:var(--tint);color:var(--ink);border-radius:10px;padding:7px 14px;font-weight:500}.lp a{color:var(--ink);padding:0;font-size:.8rem}
+@media(max-width:860px){.fg{grid-template-columns:1fr}.fc{order:-1}.foot{border-radius:40px 40px 0 0}}
+.prog{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--grad);z-index:40}
+nav .pill{transition:box-shadow .3s}body.sc nav .pill{box-shadow:0 8px 28px rgba(43,21,18,.16)}
+.btn .ar{transition:transform .25s}.btn:hover .ar{transform:translateX(3px)}
+.wd{display:inline-block;opacity:0;transform:translateY(.45em);animation:wd .75s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes wd{to{opacity:1;transform:none}}
+.reveal .pic{clip-path:inset(0 0 100% 0);transition:clip-path 1s cubic-bezier(.2,.7,.2,1)}.reveal.in .pic{clip-path:inset(0)}
+.card,.frame,.gcard,.box,.steps>div,.acc,.wcd{position:relative}
+.card::after,.frame::after,.gcard::after,.box::after,.steps>div::after,.acc::after,.wcd::after,.pc::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:6;opacity:0;transition:opacity .35s;background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(238,127,134,.14),transparent 65%)}
+.card:hover::after,.frame:hover::after,.gcard:hover::after,.box:hover::after,.steps>div:hover::after,.acc:hover::after,.wcd:hover::after,.pc:hover::after{opacity:1}
+.btn{will-change:transform}
+.st{font:600 clamp(1.6rem,3.6vw,2.8rem)/1.25 Sora;letter-spacing:-.02em;max-width:24em;margin:0 auto;text-align:center}
+.st span{color:#dde5ec;transition:color .35s}.st span.on{color:var(--ink)}
+.eco{overflow:hidden;padding:6px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.eco>div{display:flex;width:max-content;animation:mq 42s linear infinite}.eco:hover>div{animation-play-state:paused}
+.eco>div>span{display:flex;gap:18px;padding-right:18px}
+.et{width:176px;height:176px;flex:none;border-radius:26px;background:var(--dark);color:#fff;display:grid;place-content:center;justify-items:center;gap:5px;text-align:center;padding:14px;transition:transform .35s}
+.et:hover{transform:translateY(-6px)}.et img{width:54px;height:54px;border-radius:50%}.et b{font:700 1.3rem Sora;color:var(--peach)}.et small{font-size:.72rem;opacity:.7;line-height:1.35}
+@keyframes mq{to{transform:translateX(-50%)}}
+.curtain{position:fixed;inset:0;z-index:60;background:var(--dark);display:grid;place-items:center;pointer-events:none;transform:translateY(101%)}
+.curtain img{width:76px;height:76px;border-radius:50%;opacity:0}
+.curtain.in{animation:cin .46s cubic-bezier(.7,0,.2,1) forwards;pointer-events:auto}.curtain.in img{animation:lg .35s .22s ease forwards}
+.curtain.out{transform:none;animation:cout .55s cubic-bezier(.7,0,.2,1) forwards}.curtain.out img{opacity:1}
+@keyframes cin{from{transform:translateY(101%)}to{transform:none}}@keyframes cout{from{transform:none}to{transform:translateY(-101%)}}@keyframes lg{to{opacity:1}}
+.more{display:flex;align-items:center;gap:8px;font-weight:600;font-size:.86rem;margin-top:8px}
+.more i{width:28px;height:28px;border-radius:50%;background:var(--grad);display:grid;place-items:center;transition:transform .3s}.frame:hover .more i{transform:rotate(45deg)}
+.ov{position:fixed;inset:0;z-index:55;background:rgba(43,21,18,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;justify-content:center;align-items:flex-end;padding-top:env(safe-area-inset-top,0px);animation:ovin .35s ease both}
+.sheet{background:#fff;width:min(860px,100%);max-height:94vh;overflow:auto;border-radius:36px 36px 0 0;padding:clamp(16px,4vw,36px) clamp(16px,4vw,40px) calc(28px + env(safe-area-inset-bottom,0px));position:relative;outline:none;animation:sh .5s cubic-bezier(.2,.7,.2,1) both}
+@keyframes ovin{from{opacity:0}}@keyframes sh{from{transform:translateY(60px);opacity:0}}
+.x{position:absolute;top:26px;right:26px;z-index:9;width:42px;height:42px;border-radius:50%;border:0;background:#fff;box-shadow:var(--sh)}
+.meta{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:22px 0 10px}.meta time{font-size:.85rem;font-weight:600;color:#c4606a}
+.sheet p{margin-top:14px;font-size:1.02rem}.nv{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:32px;padding-top:20px;border-top:1px solid var(--line)}
+/* ===== Règles de couleur : marron/blanc/bleu, jamais bleu sur marron ni marron sur bleu ===== */
+:root{--blue:#2b84f0;--blue2:#1a6fd6;--bsoft:#eef6ff;--brown:#2b1512;--bgrad:linear-gradient(135deg,#4aa8ff,#1f7aea);--brn:linear-gradient(160deg,#402419 0%,#2b1512 52%,#1b0e0c 100%)}
+.prog{background:linear-gradient(90deg,#4aa8ff,#1f7aea)}
+.links button.on{background:var(--bgrad);color:#fff}
+.badge{background:var(--bsoft);color:var(--blue2)}.badge.warm{background:#f1e9e6;color:#5b3a31}
+.mark{background:var(--bgrad);color:#fff;padding:.02em .22em}
+.btn .ar{background:var(--bgrad);color:#fff}
+.btn.p{background:var(--brown);color:#fff}.btn.p .ar{background:#fff;color:var(--ink)}
+.btn.g{background:#fff;color:var(--ink);border:0}.btn.g .ar{background:var(--brown);color:#fff}
+.tab.on{background:var(--brown);color:#fff}.tab:hover{border-color:var(--blue)}
+.chip i,.lab i,.more i{background:var(--bgrad);color:#fff}
+.vt button.on{border-color:var(--blue)}
+.stat b{background:linear-gradient(135deg,#2b1512 25%,#1f7aea);-webkit-background-clip:text;background-clip:text;color:transparent}
+.frame time,.meta time{color:var(--blue2)}
+.hero{position:relative;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:-30px -60px;z-index:-1;background-image:linear-gradient(rgba(74,168,255,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(74,168,255,.14) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(60% 75% at 65% 45%,#000,transparent);mask-image:radial-gradient(60% 75% at 65% 45%,#000,transparent)}
+.hp{isolation:isolate}
+.hp::before{content:"";position:absolute;inset:6% -10% -8% 12%;background:radial-gradient(closest-side,rgba(74,168,255,.42),rgba(74,168,255,.1) 60%,transparent);filter:blur(28px);z-index:-1;animation:drift 14s ease-in-out infinite}
+@keyframes drift{50%{transform:translate(-3%,3%) scale(1.06)}}
+.chip.code{display:block;left:-34px;bottom:84px;background:var(--brn);color:#fff;font:500 .78rem/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:nowrap;animation-delay:-5s}
+.code .k{color:#fff;font-weight:600}.code .s{color:rgba(255,255,255,.7)}
+@media(max-width:860px){.chip.code{left:8px;bottom:70px}}
+/* cartes : brun, bleu, une blanche sur quatre */
+.kb{background:var(--brn);color:#fff;border-color:transparent}
+.kl{background:var(--bgrad);color:#fff;border-color:transparent}
+.kw{background:#fff;color:var(--ink)}
+.kb .sub,.kl .sub{color:rgba(255,255,255,.82)}
+.kb .badge,.kl .badge{background:rgba(255,255,255,.18);color:#fff}
+.kb time,.kl time{color:rgba(255,255,255,.85)}
+.kb .more i{background:#fff;color:var(--ink)}.kl .more i{background:#fff;color:var(--blue2)}
+.acc.kb .pl{background:#fff;color:var(--ink)}.acc.kl .pl{background:#fff;color:var(--blue2)}.acc.kw .pl{background:var(--bgrad);color:#fff}
+.acc.open{border-color:transparent}
+.card.sel{box-shadow:0 0 0 3px #fff,0 0 0 5px var(--blue)}
+.card::after,.frame::after,.gcard::after,.box::after,.steps>div::after,.acc::after,.wcd::after,.pc::after{background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.14),transparent 65%)}
+.kw::after{background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(74,168,255,.14),transparent 65%)}
+.box{background:var(--brn);color:#fff}.box .sub{color:rgba(255,255,255,.82)}.box li{background:rgba(255,255,255,.12);color:#fff}
+.steps div:nth-child(1),.steps div:nth-child(3){background:var(--brn);color:#fff}
+.steps div:nth-child(2){background:var(--bgrad);color:#fff}
+.steps div:nth-child(4){background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.steps div:nth-child(-n+3) .sub{color:rgba(255,255,255,.85)}
+.steps div::before{background:var(--bgrad);color:#fff}
+.steps div:nth-child(1)::before,.steps div:nth-child(3)::before{background:#fff;color:var(--ink)}.steps div:nth-child(2)::before{background:#fff;color:var(--blue2)}
+.band::after{background:linear-gradient(160deg,rgba(27,14,12,.84),rgba(43,21,18,.55) 55%,rgba(27,14,12,.88))}
+.wcd.kw .sub{color:var(--mut)}.wcd.kb .sub,.wcd.kl .sub{color:rgba(255,255,255,.85)}
+.wcd.kb{box-shadow:0 0 0 1px rgba(255,255,255,.14)}
+.wcd.kb .ic{background:#fff;color:var(--ink)}.wcd.kl .ic{background:#fff;color:var(--blue2)}.wcd.kw .ic{background:var(--bgrad);color:#fff}
+.wcd.kb .btn.p,.wcd.kl .btn.p{background:#fff;color:var(--ink)}.wcd.kb .btn.p .ar{background:var(--brown);color:#fff}.wcd.kl .btn.p .ar{background:var(--bgrad);color:#fff}
+.gcard{background:var(--brn);color:#fff}.gcard .sub{color:rgba(255,255,255,.82)}.gcard li i{background:#fff;color:var(--ink)}
+.gcard .btn.p{background:#fff;color:var(--ink)}.gcard .btn.p .ar{background:var(--brown);color:#fff}
+.play{background:var(--bgrad);color:#fff}
+.dcta{background:radial-gradient(60% 100% at 95% 0%,rgba(120,72,55,.5),transparent 60%),var(--brn)}
+.mc{background:#fff;color:var(--ink);box-shadow:inset 0 10px 0 #2b84f0,0 24px 50px rgba(0,0,0,.35)}
+.et{background:var(--brn);color:#fff}.et b{color:#fff}.et small{opacity:.8}
+.et:nth-child(2),.et:nth-child(6){background:var(--bgrad)}
+.et:nth-child(4){background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}.et:nth-child(4) b{color:var(--ink)}
+.pic{background:linear-gradient(135deg,#eaf5ff,#f7f5f4 55%,#dcedff)}.pic::before{border-color:rgba(43,132,240,.5)}.ph svg{color:var(--blue2)}
+.pic .mo g:first-child{stroke:#4aa8ff}.pic .mo g:last-child{fill:#4aa8ff}
+.curtain{background:var(--brn)}
+.foot{background:var(--brn)}.foot .lg{background:var(--brown)}
+.foot h4,.fc em{color:#fff}.fc em{opacity:.85}
+.foot li svg,.foot a svg{color:#fff}
+.lp{background:#fff;color:var(--ink)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.wd{opacity:1;transform:none}.reveal .pic{clip-path:none}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.7/babel.min.js"></script>
+<script type="text/babel">
+const {useState,useEffect,useRef}=React;
+const LOGO="data:image/webp;base64,UklGRkoyAABXRUJQVlA4ID4yAABQkACdASoAAQABPj0aikOiIaEUOz6EIAPEsaI7kC/MB+Wworn+Z/33nU8j95Pz/J53Kdh+dRz350f+L6p/MR/WrpeeY7zi/TR/fvUS/on/S64P0L/Lv9nr9x/3d9qHVEfUf9y/Hfwg/tn5M+ff4/9H/e/ye/ej3zf67yN+g/zH+p/xvqN/Hfs99+/tv7Z/3v9r/v1+4f3L+wfuB5r/NP+T/uP7mf2b5Avxf+Uf3P+1ftT/ff3J+tR6Lpv/yvUF9p/nn+X/vP+W/4f+R9Q//R9DPst/gvcB/pH9S/0/5tf3v///Zf/V/1Xi0eh/sb8AP9B/vf/Q/yP5c/S5/Jf9v/M/6z9pvaP+ff4f/s/5H/Zftb9g/8s/rP+3/wX+d/8X+S////h+6D///8/4Bft7/9/dj/a//1ou3u25j6K3qXDD///M85m+qW172dxscUiBdCy+Vj/nJo4G30MRi7Zvf9miv9JwtbEv53jBDWM6g9BiJcuFdrHZdxBwpfdqUBir+Y5+wdrI7EzSizgRCq4WGeQG0EOKhp3cgOA16aOh3En32NatiwZaUBuVCYhLhSwp/1Vob+XXN7EnZgatRjddYnWH95ULqk2mY6L4bh0BnxLKC1GuPjZshTv5VEH+CbKwxmHL+nax+4fhDwbl78Hxdiz0SqrSToyNYFyQ8C+GE6mn6MzvyScHyTeLWVdQlUXoylYegs8hGWlsMRusvhWkCQzeDsLUEztyCVVozc1v+lJ3rfjWsqdBxsXUZSE35K6saerVc9S4VWde29q+JloCaU1pdXkJ5SO6cnsn813vGxSQoAjvC/0nT963XmrmusC4Dqz5Mqx5hYoGlS5fmK7IE8DaKenbi2TxrZQK/2xm/npCVLpxYqgfJxKH+igonknNYbWoNRzwB1Sk5f7gXZnXneM9xzmDNwnFMLQ8yNSXG7w6RUSTmX68SI/XEwvdNIplRRcyHnZ8P5yH9PxMJTLKC7rr43NsFddM2gz1uF3H9jfAdhEHFaHYa/LoF/Op0Ds8zVjddHPB3YO7Jr8N52W50jyA3UBa7eSs5uOAtaL1NXFE/F32PcL3OtH6FWwTGTdhnJCcT9PiGWHQs5tQlayDl/vNGRRyT7JYY5V37jsZWfMz65Q3clVJSGhLsngSmpjQwoKAKrqWIGmqdALxzGAepB3P/hFYHhDWg10HQm+KMzjZk9c9fBatcR8MBYn4JW/++LA5OLlymFfP3GUSQgmup+Gr0xnDFz9F0zIKLvqaOOF8ahgueSGkuF5/lqmpugnGd9vYcH9Aw/9S99vy2UYGrOdizpPRZ/IAu6DUT80tgjOItp+vhn/5dW+u3Ijr7G5Y0uvyjgd86mpGuAVNdfqowML2cOSPYh1ZonQZebyTRzJGt6+OlEme/A3h7eP/xixhHhzvbgM6WQl9nOJZM+rnde8Rlioam+eVO2IzfZf1WVj6jSz+dwIQiUwv6vzyQR8CXcD/4QhJYcRDe676F/9JPvPktZFxiKLg6/jLtxm5segeYXQPkb6PthOo3qP2hJzxmNol/5vcEz8zR3p8AAD+/tAcAL0GfwQgnEAcQMP75FdMGsf4fioIqkiMyqHFMaxkVy+ZDXde1VP/nf5ovPf5FACiPU6EVSDto+vHWv+kB67t4OssCh1dssJBo4Vshydhz2hLnSgLGGggFAf1hiA/oEMseECZo4SffmSd78rLtKJam4m+ovQzR5vz7SnJEqq8Y39jAJ8cRnbsyXVo0Dwpr0mm/1YGMDbD9ysP58i4kJxw0sGrnTYTcKfiHJSdgOhYVMPjaIuy6G7VmAHildnF8Bcnsx/k+fdZ3k5g27yX7qt/VOiwn68bjWEOHFk+Mu0F4FfvC7HMI3ro1FHS8LMlgNlWYpv+KpA8fJNs8TLbEN16QGHqjZ/YRK96on9rALz6kCY0I/P0yzoaYtsnAf89izusbqVSPLHqu0L2Fdf2OTYP9ss+6xnQnF0uB/vgMaeag5gVZbwY5O/6Nb4Tz8mg9/ADk8RA5Bk7hJvKQftsiz+1aWQLrRQuBEIDgLA1Af30RRm4/frp5z1svEepOlmXSzOcvYUXNLkXW4z+N9URvflFs+RdYG1W4j//+JUQhEFzYr+x3gKX1INtJLTGm3DV5AqRjP9xChesQ3Sie+x+5qupLN2ZZbJrYV+P1ZwpNQoYRQWSVkpOVb1+oF2f//3pizjqU58+6iqjHxDJDjDhCdcJzTTXIv6vmWtba0aK/8J+lZFdW7YQwOmEGj88AYxplLLerMZ2uTSxvla/PZQ4iI//EOFgvKKK2SNmmLcQwq8UpODU2+zVJAIfpSx/RbRqjxlH+bs0tzKXGAGLVli6JnrtrVWHFZAqvs179X1SQrG5H++2/9Fjv+bal0/DK3asJTM6gAAC+ijQVfKblYdwvojYTVFizZE8N4odxxNv11eB3scmLfzvvpGiFdfq13Aj33PVzsc/Z73P5mlPdRb3ElIVMPUhQXxLDcQ7fA3FiABh1bFS6bV7LzEL9DKE9pVSOpfwr9cLtkiCArsnFysRn8BABQKz/nFqcHsoCn1bzNbyHzrSLJilaiF/bmcjfxbEiNFnyCVtZyK0HLjQ9TrXcv4H2NGsnCcV557/2mM27jdJvzMMocUVdUtoznqDifuqJFnaLCK5umj6U8rOsbvjVoocvOVHW6nIAIhnyiV1QdmzS8nHGBZCHzZW2EAb/GFdEr89Q9dhdv4z/9ewfBUfhYacklC2Ijydj03VY81/VmemQalpvoH+BOBoQ9tVQkST1d65b1AuAyNFIaii3Iu2hQ2ddzqyl4hOVKHF7kzymZIL5ZVtsVZ0H16jhGZ3mC4NilgsZe+2y/rQIxotA3pTx8woDWFxHrrJ7w6I31eoBtLHHcMolBOlM0/oRtPcAlUfv1iDk0ELOuPriUa93QgXh3/lv2qM+AzeV8C6JrX39uW9Jx6KIJYzA3QeT4jYs2JFsJj79P1Z1irYCcNxm8gpRHeAxMxmPSTefPfDSPeoeo2Ja2/wZChc5RQvd2so7xaIPHxUQMSvjZCcIsCGwOoCMbp14mv24V9ff0ZZK0K/2zgMh5piZ14Y6JyaONgPi3X2ugI2Zy8y5vURjOFx4AauxpelrRmRln/8EeUCvF1VF5/6JKofwTgsYnWXixVcIyqDT4KytI9pFfMIutvuvpAQv/Jp0456XgA9vfaCVlA3HXE44l/vrNbzuT5bI2vOhqHYhxF+GW13bWj0ylhLZ3ynb6Crnfq2I4SPK9kpQAiofv5sdA0AvpVS7LI3Yqr5SCd/SK6nzW99ZFVwHFIrUENjoUO31HbhXEYaDLxSQEQL3QcMOfdc6t/WHX/UQXxUnGT5e5+iy581L48QM4p574CSRkyZsSBzXbKH2yl4ISFKdjyl/BD37RuRfncEUBhehhUSWyrJql/X8AC9t1b8QdypdQRH6Ayant9ekELqz2bQ2+pRHKQ0TQzPdTJJQMQZfO9AQxbPbYBSbn2HyZrorKPylYB9qqErUlStSA1WdQnORbJBMOfhxBqf/QgnvAZi0KuT4+MALOCue7v4SWksUk31zppf0iMi5n8Sn5BNsXhRMmqMk/jvivutfaapj/z3Yym3D4sMGqbYYSmnw8ZZ31JmqaWHTNoheaM7BpA8vpPrSPoW/n17ZCF9VIuEiBsRROT01jfkzqlJyLsPEyTiIexMOD9/8XOOYxN0i2aAEOYzGoGbUTOKYnk4Q047uWkE3/dlNNjULOtjyByunlR3E7SHryB6arOKtBN2ULxbDSxXPaZeBoydcij5cYYpIuAES2oeQeoiWmvs6lQy19SknuLDarwpEfpcuC8H4XiiXBiny6qyONA3CeSp5ADuDovc/hFu/mhkOIalpvXtnGCl1/H8UcAe8dpDNF5ojGqKoWEMjCy/eN4gCnEW7hd7tJmZEB8WAtEysrwa4cUyWy6UjUrTxvIZFT+LIfLMyNvSmoaBYlCRAPVoJmJkFweYziQvR3YVBrWcTMJehvFIqDRTLr2TTyRmQRX8dg5V7VMCr5btOLlpfZocgluHZviTQvyGCOS9xaf4YPcd9Rl+aKTakoiVV6OhPzYyJGLojygJiQKJFQX6+xLaMZSk6ST/4xt3eIK71tr/h8UIDX+l0gqo25x0qy6uaWagxLAKNsNigzdXDx+znQPyOrI7ZLmRSyIvcbnS+WoliLxA1uxRb7QHVvrjLXY10dpU6CLGDmkG117DehLDQCqnRUmOvsRktswl7hs2c/Oe3wWoY6hPLVANTPgssVkSaQI3R0giVzXnHRAEcZ4znPi01ECqerpzfDMfJbjXj/CHqd1zLOOMIyuQrh4J9nJDMFnnUpKoWOCXumMMS0trxBvYM5zZJE3zlKC4+8pSOeZ8MM0XGRA/QY4WCF+58IrlRo3qrVRXT3AQuMMdA/ClrYBAA0Ge4WwkoYw4NSEZHojrtSJk00oxzWRM10jbbQzOYZ51EPVc9X7YIJDtYiZ5VSmw9twZH182/qA81SPgkmrKGAkfuyi5o59Y3jUuTGnNtlJMi7fD2tkj6msk/TnxDVximvLKu0njAVQQx1eZj9BcCyWBrtW8PixjoHlopoOaJUBKdeMuZ7pE+x4oAzcyIY6AoUer+RkeJbxMHtMDIZ/NrViFFBMAO59P9/gUKkfbEBGrydxUGGvRi/OKS5yDP2AYXzNezTklgwBEEZYXga3aM3/C2mC1d0tBNtgMMvpBIRrhpr96k/tTerSkiElVzMD9KUo+w7+JGju7I9DgWJCkkqc/uuWZo0VViB/AWx7cNX8QEfleYfSjV5Zrh+jrYFzAxTxbET8rVcgAXhykjD9gn5lx40WzZfR07kbVhAgKD+K9uI0eaPQNZUfx1a8r62JVZvM5Wm6VqPODvd2Unmngc4nnVx64VkLrEBcvOwmLuTER6ADe3QkZH6N3iIegI1b5vPIF6iJmE7zR+QHJyoUgNrEIro8ijO9Mk+4nazgbY2nHG7Nhj6dxyD9ajIPZNHSZ4Zz557OocwKPjbw6yHs2lqkX5OmNobDS+x5KsGdLVrkRL0gz3ESN+fSwfQHlmpWUK+6lnGDFbnSD2UlXd0Zx+Qe+6Eh4VU4t21+iKWaE9KWsTcVb+tKJlIOpuDtz4OxfclHVCC+74dt4AC68Xdta/UX0zdShAi1sTL2/ZNdfcHUrnUHimxe1HfLZhMLRwzbWKYu8bHY7xnk5+2QOQ88EY4FNSjK+wJTSiPhUq0q6yU62jNFN7CNdGn8kQZWoyq91JhOFtyR5jvaVY7vpMCZufHu7Uy9okdZbZj22I4WYgoKstD9vD4coD13+PYkUIJnbcWHhbRe3QDmCMInc7pf7Bu0N3UtG6u5m9kqemVKiHNqSgPbLHNjD41H0YuT5t2ysPt06kl0Iyb9IW9pRA3TqZuxpcemAYP9hgVdFF+vwZ4BtZUntcJ3Cy6XDS7gx+OuQclqh7bUEzVWNHr8U0eiZVdMZY0oBtdhL3VRXYYLUtgaSE65kLBsGg6e5GSVn+16uYbh+yAHvPD1BCULhKH52P0Y2Dsla+/W5/8pe8IU1bbmbvZ5+/HA+NAL/Pjxe8l79r7MNAT5X9Y2TNxp2MfsMkI/x03MHsChRyUEVL0gUf0v5ZRnmt6ncJB21psIT+wx26Vb5Gaf/uh1Urfnvu/gjl08UXpYXpvLtW+UN8pykzYffjwjuXYlv4kBdjV8Z5Ghmx1GdxF2n13kKgywrEtJr++YwsMGhGm3DHhdDCvfETYx1FlcsfehB8Ddl7FR3uBrgRZKpjBS/IL7cK6jlG+b4xfPGoqW00islRinb7I8TSszbgGaYBJuOMJHb8XjRhenXAigTHsry6ap05FfpRDVHMfzXf5OUQukAHQZ46riCCJBugiIrz+CVi7pxnYBnspN+gCWghPuuwB0RcCj5/xWsmCYPjpKge8EL1qJRn/WwFeIsgPeImxTgi+CNbf+0Mw/P0DreCTjH/hbvbagtfBuRJV3fQRxZCHSHDqhUhpUhUrhSDt0scXtQzbloi0gLH9TlYPy4Xd2xgWuWGt10Y2HIt0/u0StmSaWIcSLfugvShKik4N/KGBugu+FiYd9b2oDfTPlRW1cBZ9cgjf/QB0hZObzC4CjEy/qm1FXE4rcHO0sB6XpQtdainqDhpP65TX8Hobz2KOkZ8scbfIhCLtPso9Xlup/r6KHgyR8QRuQCK9mhKLHojUh7Wh1rxsNlkg+8Q6hjr34pqj+yWiVeXl27SD9iGfrPBIfor6FnhRQ5mqOza3OJyoTx/R+RkJfuvXwcoILBkgNQGK4Q8RY6TnckMfHESgiiOfoddiPNgbBK3OlLgrbHUkbzSXpyXgZQibQJRmYAE51J7e4wsr7Ux70eaTU3DNcoLgCRgkO9GHo6RvrdLZb9HEMczQyj8qVAjnHjO38Y6FMIKjzx0l2d5F6az2BPPzOcf82RS4jJrMKAheckOkXPHZWiSrosyapo0elLrbuOgEOfN2EdGYAhmTfcQ0Sg1iRP5CSZOx0sK1AxJPWTXodBiokpX4Vmt0Qik+9XKIsV67/kuCdv6KPtCO+Ji3cF0q12pOpytIZW7k6/rwUEw6iPoM0TOqIPffZ5xkmPhAeUIfCzd5I96YGdM90SD7dHYpznuQOUXz4cmPeY1QADcosaHf7NNoj74jPuqt1oTxIimtp8Hm2WkB80WcNXQO0HR56Z7/jrDd9PQA7vRGrKQYmBpQxwPLi/Xak+oaMpPmHuyNhn1Kyygp6FBxY93IzWcYLDf5yIhPl2y7p/8tjTGxcL3XzpBXhLMKgy0iPTCsmLxFsQ0s3TNMWdWc77SKuMPVlQpR1L69Szc3ArpCYidKnpHxhqmSvf3XAIl0jZ/yNgLRq9qZWw/7Q4SVwt2WxGL6R1jJDrwrFpXzVHcivrjrx2f0szpipgY0+Ol0B6e+wS8WnNWy6uPDe8zMa4zLcgAvNCXGhpqB1NVTfYObjSaE707v4ZQ0YJG9BGnQlf+znCp9NfRkTS0UjO5MOarbF8oeZQ6/w3c41hGfU9+kQrC1ac+5dda5SoDxQXzxzVO8lUf+vEFBMsZpLiqhbG9gUVyWZt8p3X2XD//MdPK87AtJsVzJHu9zg/+h54N2+MC5utOkf/iE+9X5xJAQcC9LIemA5UC38zQZ992h2y+RkdmNcxoG8wscXYUOCY3rE4soRR6LpQ5pyVUMfLEl0v/XyDI5+fw7VefsQ35KwysuCqShFFlmoB+0c9vM1RWhvXYHCEM8YrAWmgk1PPx9weqg5tsvWtFz8fdzsEf69VvUiPRzZFfylmgEMIcjvwmhsaUdDTwzdIGa1ptC3uLs3oNAe4uyrp87Lx5BL907/yrjDH9WhCCd7u3OrRQ5rYAdRC32RHiuDea3t0R6ybun8BFn4JzzugWOSyTkOzlRDm2HpsqMD4I1EIrr6Zeigz4Kjsh+IFWyyyS+yxqtra05qM+NRLWrhW8hABmwcwMfEaQncQ2AsjvRJhbNpyyp8az7nlmpZo30Pi6Q0Ck+Rq5N5r6zbGRLGuajscEBgrbo6JrG+v4xpOHQvGy/iNQ5247ZCUtvcBh4dminA/onGOqHrwVpgDqdhN2TF3F9GXilM3mO7DfyJK6RDLTB3JMgMP4IWf+j+z/OT4lJXS7rRNd4sAAIINfCjqyGPabU5DTMlKR0fJbe8RepOWr9OrjdkP1IGVAk4bnWs3ouNmXRPKZV6zcqvy08TUq3CC3wAX2XC23cVd87hF4fZhAwoNG17hfc5plfIpJjyrRdzFghVMuDQoc6PkLTvYKTfnU4MPwcbqBe3K9RQMTZvyynFVEE+vbqCxvYF9i+g8XrLc6GZ6yFOzJf7lHXq7rrHrQzJ1UWaH228h7GmuZv2T0f4t2+WO6vmU3SgVefFOaIp5OlZXn81w+Kfz6dPoGcFHarRYpu3d4zknySv+fParQklLHG3YvLFB6uaAGSf2mG2Ofec3/9aS6Kc+o7zVIuHFp4gxBdCe19+as+GBX3F+YxQPpL5edta/8Furp0NEWl09Y5C7G74ur6d9rr/yFiQSom6vRgyWr7QOl63S9FV4XCrcMGabUX6i1wtLiOgurkl5DsODs5pXz9Qdoky6nTY8ETMWriIWlwlE9+J1cInO9nUbJr2kjy+K2PTvK6jIm+jIhBbUhBldNv4CE3Qduj1TDt3R9IiIjZfURI9vyHtXebn0I30Egv2UMy5SA4Ku7kMV5vypyzOUWbGBU1riwbBhkRZpfVncndNktmzCwZ9cbGGp9eTkjVNBIPQ2ZeN5SPV5dQd+oDH603SdaSy4JQl0HijCdDBruB5isziImeUsO6C2YpYb8Ed8edggkt6tyAVur4tItkk9gDYPFiNs0hYG75+FDOo4Bkxgvw5AlZpkCG6iWg8SdvVCAbig+jQL3cgsyUwJDlKTg9KtNXfrGuKL6kkea3NSU1DTr1xK8IqjFYsFjLFAHBt1bFDvWUH0S668aw3eUt3YRXiL94vnAl73sO5XtI63KHhTXX23U8kGwY2RRzB3QXli0mwT62UmTNjWDqUbNgZo/rJOZBC3v+WN+95WQxXRi+WX/zvotnb1C35zK4CMH5GE/8Y4OArh7EXB5FIIR8DEfOdowkbJerKkY9qZAAUiT9/uQtrdja62YaBZXTn1g4vmmNuAs4xyc4TGCqpsqqerwX8gXgrWEhNTmrLz95HZMJM5Tbt+mHonoZAjA4MKqMAz/TCgK+dvOR4P9l6/L9WqKztXZroX6JKUHw5KU8zoIvGzOA3dIGu325jU9CF6YLEtx8l4tVD0ZhNcfPesrmN8NMA3ADtwXc7KdZswlhXK3tamGwhL4FfiUojS/Jth8h1Tw5OW2JlvQsZ71gZ+alhKhkKIEcIE/aGtG4CqydXsZElNwCUhUbsoUQgTe42zEwU5f4dumUGHEXNsKEZxJ1BokeJsZksoPpTChO1F6a+VI07PIA43DgjMwuTzFS2dafcCCk3v7jAhJ6BCu3AzpHUPUFvKM+5YlQaxma+LABwzcxzwGl3UUtG3KR6no9s5Fpu1yUQaVM4+4Xb+XEa2m6HLfR3Q371iYL1MD38bjiE8BTb2RMlCrzfET5R4Zt/T5wFC+h1duNg1gW9p38oonMnJ17J8ah1A0J562i/XGcY5Ag4C+JhoyY3yl+If+8D79MRigCJq5o5m/DqzkrmK9I4K7qyC7EV9vkCTZzT/7UQ8LeggqFcFBqruSFq9yacehJIrYqSpBwYr4MSJ6L1ByhSFP1t9logWPvbvOCFRPI0YyJIqhvgtBMKV9y0O4JESzTNRAGIIeoiuscrthJCeoIDlnykmRkvURZCukxow5rVzU6E9MK5HH1rfATexBBE/0P2DICmHn0OEWqk+TfjgUpbxC1wnyEBxo7bGJoFcqwT4W0grCyK77fcA3PC8h3MU+oN7xXNoeqIfBo9pVmxLF/au653CR+5fB8Y5GHF+H2D2T0aTgtxxVStiWWRs3LUYPXCat5OX2zhGGzNlC08NCuSQHCslB7tIpwVVJQxtU4cZY8kJMBl+uvGBBRvE+Y5gPRhBKb8c+Gm+dCLWZ8ndTqC0XwJHlEURs01+pZyr4mvyps99V6vdSRcVl+mAggub43eVOJnrJTjl5px8jEk4Hw4GchuDbOnP+X5ZRlbXInhKfTAcCAGwl/J5gp1Fw/QGwge6FQahLJkwLkWhDeCl0aG9wcGb9Id03K7epILuwBCw8cmWTsQKOCA5BDRKWp0tsSoLAiUOsXXglzT89wENDLH5uzs0n+sqhWVVk76OvggiiKT/Q+6SLYv6f9bhbuBPf5QxudF2jG7MZjiZ1p0fA6GZK2kKsFX32VQrcFi/HofF2ThqmaRdyUXLSzd+wKXfWbdrg/l1cgn3wHwAaMN2lHROF3u5VuhnTUrNuoJeJrY9GHoPM6H2R42CwaYVZGDQnZnkaxNVyiiNOEu/wDAx5tub+0JzZlZtKXZAt2qqD8SRg566amZE0lqsVIq9VaAinr9X/FoToLIsb2h3FhKmtVmTXQZBlZepklzQUAU9GExkvObRl0JfwpdBDpckQVPjtMDZU1OUvbc/qDMNFwW+82HXIEG/qAXbdL3e28pSJjQkcg4MVTZs7vy0l49CZMCbTDERvazHxkIqL2YDWNUU88SfffyREOdV+2TXEosniY90WVIN8yoA1d/6E9Sth+xAeoNXAEGz/vWzeOSJtgOju1fy0b4A+bbQvyvCRlrWckUV7mXjtjFDKyRan8KXrVpjxP6oT6tZ6DUXvVh2r2ONm7oiQNfH6lXgWLI7yLxHTCq7kbWLZMD6PJ6bMeeMQZn+6C8ARkSmBgH753QPDc19p3NzDUI9lj3QRswypAZENWRdkRUvB+b22xxcIZfrVuAZr06rhCY4ILkqJQ/dmskWmg2axhSn1sbgnXjILgywNNUFTVfYe7FJip+oMAv//LAdMw9KnPOivl2l1q4lw4vFmu1+LL3W9mUaE5QtTKIQJl7WCOXGpy3+iPMLJTW0a2zxKmfBrniBGQBHmqQkkGzfdSd7FWF1sSxP5BpkTZjzzNq4eAjfYDiK6XLaoaFtxAvWv9C9zlosm6LSRPMJXENYHPIEWywA7MT7TvU/wy85gDuqDjTGYv/Iz0ZguSZw+gnI8NHj0q1Z9M1kAAlqgjJQtGFoUBiAuVsyCcX6yp7mzRnZQ01XQ7ej5tB5S9Upv/KD78AgDbdNwFzOqvkVzSpBjRHoethc2F2nOZVeCU7xvKZGe6gnXWujc3/dCPtDDVwLW28OsookLqdWTPXFGC11YGW2plKaskL+WBZyEpqASD6QHHT9TpuHgCDP7COmU3E8Pcm6/MqHzT6qHPlhfoPn2+mkOMssV3z1djWUv4QtM3ilUdHRcXXaQdtLtER9BPGrC4PR/WRMO4JUGBAwRVebkvy0QPY3dc2kJJtWCVTVpQbg/sWG12jpNbXRZJuWjzNKn2n+9DTO+MSkbQpXktlekyPXgR7Q4PUBZbf2Gs5iQX2TlKsgnforgbiEb/6PYm/0h1GRClwN2fb8NCMBGEC1uFswz18+1J5VRImVNQj+cbgIzSgPTaOgaCmH5LbS05/R82uV53ykgxyD+5ljA1Zxe26VWDuM957FVEjTSJIt8ZvbzSjcNOA9dsy71qAI/++j/4IWPBc+wrwUCl1XT2n3HJyKhBtnzDUAywNZCoVrnIeRyjf9i/QzGsFv2MIA7tjuHlul9W97W+AqlvWHKPQ7dGmfaqc7sCEG1sh7NWWAYupYT4pU+zBUVolBBNGUjsKpTFvQGpm4ZONAVlCcY+I3ohqIvaPNGqtqhcZfFIlL4GPxgjhh+611C/qHuOBpuEzrGNzLTn4lGKnOuikXwh5n/U6PGQ2uiBRLNNcKE0aZt07lB1BF865Xr+V//+iFU1q5xpYGZSgGLT5B5sfJsmfvPg69XVSjuGydlTKRy00xP1d9/WnmvZ8St/ESm5arid4WCtJ3jPx9NxeomLkf8DQCxSg9tHHxLsNYmDh7Pf7ooXlDQazFG9SjB6IZ0ytHP8PqrZuTKVgQOqNYLNa6VtKX9OFOkqW6/KOMx353V9Y762qsKzml4q+OK1bFKqv1AYw7x+FTELY6xNixr5t448/5qs2P3JZWdLWXPOuj30WWdStaH/jnrCUXfOPOdGRYivzR15/i0xk7LGDv8J7ubj/fgNkuNyV8UelILterqsse30nROxsNTAsF+VQAnhIjrmMZ0FtDF3UkIa2MX3Af7DRWxaOOKE5h/iJCrjJmQgnwW/uNuUuktSQO7F+Zl6I9raWalqFVN9UR0v28FEDgcehQbAYjXPLctTHxCin/12qJyI/tbPfyeXd+1+4VtOU4EMBcEj5RNE5Oju/6YEIhlX+uGZNaAkALZd9t/9s5wa6V300ZvX6KK/7ioXyEPaHwKH+o9p+1w8pFuaZ7epDtfdD6IxXiH1fZ1D+ND076cbaSvKeMq3yzE+TR3dfICuGjbVt43kL/9Ze4nO1U324o03Bpd4ZjWK9UB1JFCWMEvWKcBhAzO93CgafMxQWzsIoT/W/E/9O9Z0MoJghEUWwJwe8UqVn+L3UeC9zNR2jbHPji+IYNBzeV9F48tGnK7CqjT8xVRs9sXfzHONET9Zs4QxvwpLbnh9l+OQ/BQnrQNR5k+gQNISw6Ac7J2HXNcd0m1oIx/tUoyt7qsRnYaRi4M/HoGLi5bi5wqt1cUE2q0dhBRn+Vfy5UANQ1WVhOPIeK/XMTiOHcSBk6I+/339oWdhzTPuzWbQ/vkn1IiTheXL7YjTiLJzZsxvX1OhAj9Ii5136dgEu1G4Mrb4rGAxptq4dY+FezdoPscbQRP+MNKhxUee78UlUTa07l9piG1/Y+Eef2wc3+avmAih7B1utPhsD0u3BQAChU3Eipx7n39LdHVwcacmDjuvYURp3YxwYiIpOL8BA583+6pOG7cZDckW+bgo3Nis9CH7Gwk7w/opcQlRPRvyZGBZYZ1xftfETqRGn6BC3axbxCZN4Pd+dkFEHBn7EWHW0YI/oePEx6Eu4fvJbYfuzNoifgWBOkWuqKBPTG+gU2OVkcKGiP+aAmMPBz4Rc4xaBM750Llxz+PKSijPaqFWbpHa0h8cDB4XXs96e302TvlCAOy9UzgbXPyI1jGNF3Pw6EuTdWeL2lvyVvzZDkH1ZGwDINnQ2rpjb4vcTB74R46C2xtAA8HwHKRekNcrdTXuYXnhnDTpXxTWMOYbiLwMkKWHSxNZZU7/UEijmxs48OJE2MWnb3Pxc5xwMrsZhQ/igDb4Pr9vemJAYOF3ENZRZ4hXpIJHNevrz7E/q+r/CSpP1uH5rbTWyPYut361U+8xfSqJec9Ho4DQvy7RzGQ6fGIwP2TKFQ2l6OpwbpRD7R95jXBD+1Du59tS4Igc/MyGmr6JTSy4LIP1VZJno5qX/p1VN/f32ohxY0uYpmpbGpl79IGRu2sb5doEdg9GQfBjKl1uiBDim289eHhjuPWPvFC327SQJwADHXBxyxnRWK8KALsLEn4JZy+8HqRIsCy4s8k15RSY1oJ6QIF23NeIm4RtvdGV8ke84abKEHL70kMvnWLf4TugmJcR5W3Vdq6b8ift2YUj6yKiumR0DDlUG01c0kcGXNgv3oE1Y+Da6PKcFzhI2VXL0ZnRN7b3jPoDIA2SiXBGCUPqKKOPFl7v38D8acQX2/N9xmWoUm8HNoilf/wztVT1pDef3RtJuGhYkaxDRxvh0JDYUcNciuqQlgL/NwTyEWifloKXpFJRiOpXxWHaIHTgHJAv7qcVXsQyNtkgklHe6NAv6QB0fA4bZjeXriGGrZuKCB4VVB0oom5mmRkF2lcxc2Ja7ysdHNUyrMUWpNwkh41B0xFNDjfXfm4yaQ6+PhUw0Fa2UjLIRr6vWIRpapQCWAvyu3aoTrzNtxSgEIhzONhZbJm8lRHA5neQVQFUkoBaysCe5K63LJgVe5L33Lj/VxSrLe+XvG/PdwN5jsBq0fAb1Dk2bGzngjhQwavw601678vpdTu4qtHO+kFsggUJmOcB2Mlt8lo3YNAdtjxep41A49jzdqzL4r5KBRnRco8ToNO7+KVraTtuQiusV7Gax8+IsLvTME+r817v3MtNxaikfa4zVjMF376b6LNb8n1sBHNz2oQjwCmfJtz75RbmOtIoBZL4H0mFdctHqYyy2JLjOLN2fHcBTYLP/jUc3TqPtbYtam/t8nPK/YaHY+peN7WnXJPxwzsUjtSlGVz+NVCjTfKaH3BMHJ3uM11bEO6FIqarEkJHH3tRRye0LV+fckGloHOVu9i/5oBCEZ3OZfrCAt7BFxlfhXmUoxLh9Y8fg/QO0ZthrWbojXeUcppCMUa8odqOHtlGVFMTROguExD17ljwD1ArCL9MrTfT2ORGbKV3oe6sIqiLhg0y2rEgYao9wYsG3VucSupXogWPfTKiTvJWNoVeGFJBAt34Adms6sZw7avqzBOwEYO3C7YRLCwEefh4CNH9HAXHTh5SqUeYvSHRwHaZ9zGHtBWq63oXkVsKNrJF2ZZC5xO8RYwFij1/8mz9tSIhfvTbUF/p987OkThZfacLJ2inks0hEQgmAYGHfdh9JcuectdbArgPsbGlyvGQfnrT2f2c5NqKUWW6J2a1G+UWghpOM6JwLoFa5S5UM19bk58JQLuTnzXOgHZOhA9DkrWDNMgG9S32F3tYPROO33ytYqb+BQT4pcRN6/Z+2fj9Y8uQSQyPuhSkS6urjGUwRMNsj/nHZ2+T7H3KbzAsB/UMZyyAsJKiJd0/bJHx5+Pfs+gP9bwCri7aHOTG1mgGvu+9p2X9Tqe5VvWigIaECJZYlI8ebSnNU8+1+hoQGMEJzC9CoHfxMItZB+iq5zgrpggCO07N09ah02oWt/87qjuV520VckC3dPNdMEEN1GcVNtpCeNJ04Pmh/JGoUnsxr3XUyXQe6N8BLkgfJKZDDTzzq5/iH+BILjcRphjCCzmJoXs2cb8zTOBO/NUr0rAwzRJ9Nk9r8/z9AAaSMm0ftuB/gvYEleE6iWDuK0pTN8ck7KWfbdnlq6l9uXVTQaWhYhNelYBFDoe2J1EI1BW9Xqv1UHiWSgRWAnkiOu1OiCkx6kZqYiP5o2EoPaQVRusixuVSJT+MPCfyxglVXy2h+g3UyF8b0qd3lNpK0bF1PbNTfwrY0LXRmiftQF0T/bXAKcOPeVQxwMFY9/8jceAs9bLt1Usev8QT1FZQSVTJHlb/byic6g2f7MoVKyiiAyfT5iORlHLlp9bR/ocrdzDvpLT1wi0b+ldt6MJibxIR/+DZpxJg++xuBX+nfdCmCUM1YCYV1EeiM8Wr01xjkWzgaowqh9mtSAnNIymg8WgJfDJ7aOYVK8f5xRWxebMd/x2BdttwaYbPm5x/b6whxM86MGTn5wdrj4L5BNpuyQpLqbr7OJxChrd0ZInObQRjbcgtv2qE2Ie3afTf1A3qw9pQCADofHqOKme+6I8dR3Nu+6PlfIAXO5BKvCC8igghp/pTSa4CvbMTOBQKQ1ijlv4UnMUm14QXLEAo7WKiEEl7tsRLdDslgIsRJd0YNtVy03xd/S1EfRJXZgH9XwA7WJq7e6VPf7jqJeyALuq4x/XunHi4yPTDIajPB3mjpNKy+m/tJR14nZ7P+Y3jeu86LoC5YgEs8Fyxjik2dj8rL0ruON+ekkW2MihwEQVpfvRyjpLVDZ6watyapGKp7bc6EgR9VtbHZEVtCvV6cmb91EzMo8/7ErlL6YhXtS9CF4hCoPL8rXJa1OJpRq1SMLDNQPriSY3ZT2C1oe4Z5TbckJDZIKoqsNhIIwKd5qRTBlwAlXbJMG9sxP15ItPD/zIlyg/4Eu5olhNJFCQpQXQgfg4S9VQI4XmMeVrk+Luh8sO5dCBCBU5C0evhO9F6bYS/YNFkxt131SwcJcRSgr9N9tMaWMjt+Mmt+mZ7UQZoueubOkkhUolFGiyoMEFxDI4eDiQhzvzK6OiOBvPDBu34UrXeFCQ8TqpJDkD6I2HHoYZvEpuxIIGzcNv5QPjrZ3/Zt8i1YA56cukiD8dowa8KopwnUP+eTcr6qpOFjKFwq2AWLHJcntkMjzCkCpH5JVq/dHUxv7PUKITaa+tz/9ckBFM3ZC6oYFc14z8PkpF9A8Ot1gy4efcnyXSJUA0GpixBU9fLS05GQBFf5uc8Qdy59wz4I+n5IZtwsURp1jrlmkpVbX7emongMyQ1TU32Z2NXA6VXDSxHQeIs8Acb6REyftcr4h8HQ5OuV0TiOpOJwH76VHcZ+4qYw54Uw826/lvPf7QesibMKrK2vBMohr1q2HQy4W/adBB2De/8+OR0kXrqgjm6ah4oBP2/mSmq91Y5s1VWgygYz0Xj4wqP2gzovc2VXMDuUMrevn9Srm0ozLBvN0DiW7fZe+1J/P0rPnOdgBr9bR3jUZ9jGGEIDSzZnySZn5GxrAowM7PYk1DCjVR4PeOAA1pfsyJrG3ILKeeiRiFZ6u/3vIb91OV6Kk20P3keYZ8Fa7pJvrzOwKDiUHEiv8zWan2Th71N2MOpUICaS7i5pJ82QVvSp3p2GVJ6am+KupzPSBE5MpJEmDSwcXjMUqLJ3qDPT8BkgdBThomYBBTakHQ9IlxKGHTO2vf44julIf5AwggkdzQKIZvGHV3nOCet1khObsGdsqHea3D/zxSR9A8hl/DoofdXFRHvO+h4MIffuMts0NF+pItILRPbyy2tQmJA5GnSlrBySIXHNe1O3CAR2dImSz9ZNi8hx+l6N+2y1Fv/ip6h9DgQhU9dTyyuNiqKHzIjfsH4xep6m89vhtu+vkw3/2KrF8rA3PtWrsgLacLwbpn1H777YM2y61rFko/e9vh7D8zpexzinIEb6CMezPDkAAAAK46Ao5FPJTdcDt4qkXMO3D96nqY6MRSB0UiUrNq1bX+SIldxH+Bwhxlj8ENlkHPpykkkrQOJehBgn+T+aPk5tFuUzd30mjPGsnZ6VvJVMoJroCXRWlqhMbY7Ee25fWp2yx/sTBesk8B0DRE/ClXl++a3QMuYEheQsbcSH2QSbLbD7xQzxNwl836GOMjXdadp0rH2WWQKf11HL71lg0xxScegJE2SGPqPnGBgZGpe9lL0cjf4vit99qPlVeORD3TpFvEmoXKcNEqcxe2CfnQMfuzLY6TUMP6rt2L8RGgZG0jvYcmmM8NWdzr2KeqbwXyEdPX4M+x+g+Gna8r1A8iYSpbVh/F/zbYXGxR6Po6UZQmSxVYDwPtwugsDDNCtCtKibc4EE9HM532XmTf8++PE1w7cQPgnYWJVgJLw3VYV5F+gb8Pp/KN0j1s5xudacpyS0+uLo0Oc2q8iOpWVqL6fi6TCCqoMzU7OUPt7M7k/jMRvJ8cSxsWUYBT7/R/9KYtG1ncAcfyx0MvHxQy7GUEvDrkVW/eaTdFy9oj4e0gVS9vfaF20eGPCSkrWp1m3LcdIdQOwDBgAwbx0qHGDzGiyPLBmRNnPYouIYk+j47oNUztThYX9m8/AXU55IXIklbcD6qnuskf+fe08fZsXwMdaErUP2hWbHbGagmYFhpHWCTrz0VZd4tDHD2skZ8l56bJQcrN5QBm/aSq6B2APnUhZVoYWeHkqw3QTUt4NaXqlEBIbNLJA6AyX/rm/YEYsNT0Uk+AAAAAAAA";
+const PAGES=[["accueil","Accueil"],["stic","STIC & AEI-STIC"],["je","Junior Entreprise"],["asso","Associations"],["activites","Activités"]];
+
+/* PHOTOS : pour ajouter une photo, renseigner l’identifiant du cadre, ex. {"hero":"img/hero.jpg"} */
+const PHOTOS={};
+
+const IC={cam:"M3 8h4l2-3h6l2 3h4v11H3zM12 17a4 4 0 100-8 4 4 0 000 8z",phone:"M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z",mail:"M3 6h18v12H3zM3 7l9 7 9-7",pin:"M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11zM12 12a2.5 2.5 0 100-5 2.5 2.5 0 000 5z",arr:"M7 17L17 7M8 7h9v9",chk:"M5 12l5 5 9-10",play:"M8 5v14l11-7z",fb:"M14 8h3V4h-3a4 4 0 00-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z",ig:"M7 3h10a4 4 0 014 4v10a4 4 0 01-4 4H7a4 4 0 01-4-4V7a4 4 0 014-4zM12 8a4 4 0 100 8 4 4 0 000-8z",in:"M4 9h4v11H4zM6 4a2 2 0 100 4 2 2 0 000-4zM10 9h4v2c1-2 6-3 6 2v7h-4v-6c0-3-4-3-4 0v6h-4z",tree:"M12 3v18M6 9l6-6 6 6M7 15l5-5 5 5",stic:"M4 5h16v11H4zM8 20h8M12 16v4",je:"M4 8h16v11H4zM9 8V5h6v3",asso:"M9 11a3 3 0 100-6 3 3 0 000 6zM3 20c0-3 3-5 6-5s6 2 6 5M17 11a2.5 2.5 0 100-5M17 15c3 0 4 2 4 4",act:"M4 6h16v14H4zM4 10h16M8 3v4M16 3v4"};
+const Ic=({n,s=20,f})=><svg width={s} height={s} viewBox="0 0 24 24" fill={f?"currentColor":"none"} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={IC[n]}/></svg>;
+const Ar=()=><span className="ar"><Ic n="arr" s={16}/></span>;
+
+/* Cadre photo : id = identifiant, cap = photo suggérée, r = ratio */
+const Pic=({id,cap,r,cls="",par,children})=>{
+  const src=PHOTOS[id];
+  return <div className={"pic "+cls+(src?" has":"")} style={r?{aspectRatio:r}:null} data-par={par}>
+    {src?<img src={src} alt={cap||""}/>:<><svg className="mo" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g stroke="#5aaeff" strokeWidth="2" fill="none" opacity=".5"><path d="M0 230H80L115 265H210"/><path d="M400 55H330L295 20"/><path d="M0 70H55L85 40"/><path d="M400 250H330L300 220"/></g><g fill="#5aaeff"><circle cx="210" cy="265" r="5"/><circle cx="295" cy="20" r="5"/><circle cx="85" cy="40" r="5"/><circle cx="300" cy="220" r="5"/></g></svg>
+    <div className="ph"><Ic n="cam" s={15}/><span>Photo{r?" "+r.replace("/",":"):""} · {cap}</span></div></>}
+    {children}
+  </div>;
+};
+
+function Reveal({children,className="",as:T="div",delay=0,...rest}){
+  const r=useRef();const [v,setV]=useState(false);
+  useEffect(()=>{const io=new IntersectionObserver(([e])=>{if(e.isIntersecting){setV(true);io.disconnect()}},{threshold:.1});io.observe(r.current);return()=>io.disconnect()},[]);
+  return <T ref={r} className={"reveal"+(v?" in ":" ")+className} style={{transitionDelay:delay+"ms"}} {...rest}>{children}</T>;
+}
+function Count({to}){
+  const [n,setN]=useState(0);const r=useRef();
+  useEffect(()=>{const io=new IntersectionObserver(([e])=>{if(!e.isIntersecting)return;io.disconnect();const t0=performance.now();const f=t=>{const p=Math.min((t-t0)/1100,1);setN(Math.round(to*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)});io.observe(r.current);return()=>io.disconnect()},[to]);
+  return <b ref={r}>{n}</b>;
+}
+const Head=({t,s,prov,c})=><Reveal className={"head"+(c?" c":"")}><h2>{t}</h2>{s&&<p className="sub">{s}</p>}{prov&&<span className="badge warm">Contenu provisoire à valider</span>}</Reveal>;
+
+const Words=({t,d=0})=>t.split(" ").map((w,i,a)=><React.Fragment key={i}><span className="wd" style={{animationDelay:(d+i)*70+"ms"}}>{w}</span>{i<a.length-1?" ":""}</React.Fragment>);
+
+const Statement=({t})=>{
+  const w=t.split(" ");const r=useRef();const [k,setK]=useState(0);
+  useEffect(()=>{const on=()=>{const b=r.current.getBoundingClientRect();const p=Math.min(1,Math.max(0,(innerHeight*.8-b.top)/(b.height+innerHeight*.25)));setK(Math.round(p*w.length))};on();addEventListener("scroll",on,{passive:true});return()=>removeEventListener("scroll",on)},[]);
+  return <p ref={r} className="st" aria-label={t}>{w.map((x,i)=><span key={i} className={i<k?"on":""} aria-hidden="true">{x} </span>)}</p>;
+};
+/* Écosystème : remplacer les mots par les vrais logos (ESI, INP-HB, Inova, MIS…) */
+const ECO=[["AEI STIC","Association",1],["ESI","École Supérieure de l’Industrie"],["INP-HB","Institut National Polytechnique"],["Inova","Junior Entreprise"],["MIS","Association de spécialité"],["UP-PRO","Projets des élèves"]];
+
+function Nav({page,go}){
+  const [o,setO]=useState(false);
+  return <nav><div className="pill">
+    <button className="brand" onClick={()=>go("accueil")} aria-label="Accueil"><img src={LOGO} alt="Logo AEI STIC"/>AEI STIC</button>
+    <button className="burger" aria-label="Menu" aria-expanded={o} onClick={()=>setO(!o)}>{o?"✕":"☰"}</button>
+    <div className={"links"+(o?" open":"")}>{PAGES.map(([k,l])=><button key={k} className={page===k?"on":""} onClick={()=>{go(k);setO(false)}}>{l}</button>)}</div>
+  </div></nav>;
+}
+
+function Home({go}){
+  const W=[["stic","stic","La STIC et l’AEI-STIC","Informatique, Télécoms et EIT, et la mission de l’association."],["je","je","Junior Entreprise","Inova réalise des projets réels avec ses élèves-ingénieurs."],["asso","asso","Associations de spécialité","MIS et les autres communautés de la filière."]];
+  const N=[["stic","La STIC","Découvrir la filière","accueil-stic","Étudiants en salle de cours"],["je","Junior Entreprise","Inova et ses pôles","accueil-je","Équipe de la JE en réunion"],["asso","Associations","Par spécialité","accueil-asso","Groupe d’étudiants d’une association"],["activites","Activités","Temps forts","accueil-act","Événement organisé par l’AEI-STIC"]];
+  return <div className="page wrap">
+    <div className="hero">
+      <div className="txt">
+        <span className="badge">ESI · INP-HB · Yamoussoukro</span>
+        <h1><Words t="Des projets, des"/> <span className="mark"><Words t="talents" d={3}/></span> <Words t="et de la créativité à partager" d={4}/></h1>
+        <p className="sub">L’AEI STIC valorise ce que construisent les élèves-ingénieurs en Sciences et Technologies de l’Information et de la Communication.</p>
+        <div className="cta"><button className="btn p" onClick={()=>go("stic")}>Découvrir la STIC<Ar/></button><button className="btn" onClick={()=>go("activites")}>Voir les activités<Ar/></button></div>
+      </div>
+      <div className="hp">
+        <Pic id="hero" r="4/5" par="-.05" cap="Élève-ingénieur souriant, ou groupe d’étudiants"/>
+        <div className="chip a"><i><Ic n="stic" s={18}/></i><div><b>Filière STIC</b>École Supérieure de l’Industrie</div></div>
+        <div className="chip b"><i><Ic n="act" s={18}/></i><div><b>Projets & talents</b>Mis en avant toute l’année</div></div>
+        <div className="chip code" aria-hidden="true"><span className="k">const</span> aei = {"{"}<br/>&nbsp;&nbsp;filière: <span className="s">"STIC"</span>,<br/>&nbsp;&nbsp;mission: <span className="s">"valoriser"</span><br/>{"}"};</div>
+      </div>
+    </div>
+    <Reveal className="stats">
+      <div className="stat"><Count to={3}/><span>domaines : informatique, télécoms, EIT</span></div>
+      <div className="stat"><Count to={3}/><span>axes : projets, talents, communication</span></div>
+      <div className="stat"><Count to={4}/><span>pôles au sein de la JE Inova</span></div>
+    </Reveal>
+    <section><Statement t="L’AEI STIC fait rayonner les projets, les talents et la créativité des élèves-ingénieurs STIC, de l’idée initiale jusqu’à la soutenance."/></section>
+    <section style={{paddingTop:10}}><Head t="Notre écosystème" s="Les structures avec lesquelles l’AEI STIC avance." c/><div className="eco" aria-label="Notre écosystème"><div>{[0,1].map(k=><span key={k}>{ECO.map(([n,l,lg])=><div className="et" key={n}>{lg?<img src={LOGO} alt=""/>:null}<b>{n}</b><small>{l}</small></div>)}</span>)}</div></div></section>
+    <section><Reveal className="band">
+      <Pic id="band" cap="Grande photo de groupe ou du campus, format paysage" r="16/9" cls="fill"/>
+      <div><h2>Une communauté, plusieurs façons de s’engager</h2><p className="sub" style={{margin:"10px auto 0"}}>La filière, la Junior Entreprise et les associations de spécialité.</p></div>
+      <div className="wc">{W.map(([k,i,t,d],n)=><div className={"wcd "+["kl","kb","kw"][n]} key={k}><span className="ic"><Ic n={i} s={22}/></span><h3>{t}</h3><p className="sub" style={{fontSize:".9rem"}}>{d}</p><button className="btn p" onClick={()=>go(k)}>En savoir plus<Ar/></button></div>)}</div>
+    </Reveal></section>
+    <section><Reveal className="gcard">
+      <Pic id="mission" r="4/5" par=".04" cap="Étudiants travaillant en équipe"><button className="play" aria-label="Lire la vidéo (exemple)"><Ic n="play" s={20} f/></button></Pic>
+      <div><h2>Notre mission</h2><p className="sub" style={{marginTop:10}}>Valoriser les projets, les talents et la créativité de la filière par une communication vivante et engagée.</p>
+        <ul>{["Valoriser les projets","Valoriser les talents","Communiquer sur la filière"].map(x=><li key={x}><i><Ic n="chk" s={14}/></i>{x}</li>)}</ul>
+        <button className="btn p" onClick={()=>go("stic")}>Découvrir l’AEI-STIC<Ar/></button></div>
+    </Reveal></section>
+    <section><Head t="Explorer le site" s="Quatre entrées pour tout comprendre." c/>
+      <div className="row4">{N.map(([k,t,d,id,cap],i)=><Reveal key={k} delay={i*70} as="button" className="pc zoom" onClick={()=>go(k)}><Pic id={id} cap={cap} r="3/4"/><div className="lab"><div><small>{d}</small><b>{t}</b></div><i><Ic n="arr" s={16}/></i></div></Reveal>)}</div>
+    </section>
+    <section><Reveal className="dcta"><div><h2>Suivez l’AEI STIC et découvrez les projets de la filière</h2><p>Publications, portraits, projets et temps forts : tout est sur nos réseaux.</p><div className="cta"><a className="btn g" href="https://linktr.ee/link.aeistic" target="_blank" rel="noopener">Ouvrir le Linktree<Ar/></a></div></div>
+      <div className="mc"><div><img src={LOGO} alt=""/><span>2026</span></div><div><span>Élève-ingénieur STIC</span><span>ESI · INP-HB</span></div></div></Reveal></section>
+  </div>;
+}
+
+function Stic(){
+  const D={Informatique:["Programmation, systèmes d’exploitation et ingénierie logicielle.",["Algorithmique","Bases de données","Génie logiciel"]],"Télécommunications":["Réseaux, transmission et systèmes de communication.",["Réseaux IP","Transmission","Systèmes de communication"]],EIT:["Domaine associant électronique, réseaux et informatique.",["Électronique numérique","Réseaux","Informatique"]]};
+  const [k,setK]=useState("Informatique");const s=k.slice(0,4).toLowerCase();
+  return <div className="page wrap">
+    <Head t="La STIC" s="La filière Sciences et Technologies de l’Information et de la Communication, à l’École Supérieure de l’Industrie (ESI), au sein de l’INP-HB à Yamoussoukro."/>
+    <div className="split">
+      <div className="vt" role="tablist">{Object.keys(D).map(x=><button key={x} role="tab" aria-selected={k===x} className={k===x?"on":""} onClick={()=>setK(x)}><h3>{x}</h3><div className="bd"><div><p>{D[x][0]} Débouchés dans l’informatique, les télécommunications et le multimédia.</p><div className="tg">{D[x][1].map(m=><span key={m}>{m}</span>)}</div></div></div></button>)}</div>
+      <div className="mosaic" key={k}><Pic id={"stic-"+s+"-1"} cap={k+" : salle ou TP"} cls="t"/><Pic id={"stic-"+s+"-2"} cap="Étudiant devant un écran"/><Pic id={"stic-"+s+"-3"} cap="Travail en groupe"/></div>
+    </div>
+    <section><Head t="L’AEI-STIC" s="Une association étudiante liée à la filière, qui valorise ce que font les élèves-ingénieurs."/>
+      <div className="row3">{[["Valoriser les projets","Faire connaître les projets d’étude, d’application et professionnels, de l’idée à la soutenance.","mission-projets","Présentation d’un projet"],["Valoriser les talents","Mettre en lumière les compétences, parcours et réalisations des étudiants.","mission-talents","Portrait d’un étudiant"],["Communiquer sur la filière","Présenter la formation, ses domaines et ses débouchés par des contenus accessibles.","mission-com","Création de contenus"]].map(([t,d,id,cap],n)=><Reveal key={t} delay={n*80} className={"card "+["kb","kl","kb","kw"][n%4]}><Pic id={id} cap={cap} r="4/3"/><div className="tx"><h3>{t}</h3><p className="sub" style={{fontSize:".92rem"}}>{d}</p></div></Reveal>)}</div>
+    </section>
+  </div>;
+}
+
+function JE(){
+  const P=[["Développement","Sites web, applications et solutions logicielles sur mesure."],["Télécom et Réseau","Conception, déploiement et sécurisation d’infrastructures réseau."],["Marketing","Stratégie de communication et visibilité des offres."],["Montage et graphisme","Identité visuelle, supports graphiques et montage vidéo."]];
+  const [o,setO]=useState(0);
+  return <div className="page wrap">
+    <Head t="Junior Entreprise Inova" s="La structure d’élèves-ingénieurs qui réalise des projets en conditions réelles, organisée en quatre pôles." prov/>
+    <Pic id="je-banner" r="21/9" cap="Équipe Inova au complet" cls="zoom"/>
+    <section><div className="split">
+      <div style={{display:"grid",gap:12}}>{P.map(([t,d],i)=><div key={t} className={"acc"+(o===i?" open":"")+" "+["kb","kl","kb","kw"][i%4]}><button aria-expanded={o===i} onClick={()=>setO(i)}>{t}<span className="pl">+</span></button><div className="ab"><div><p className="sub">{d}</p></div></div></div>)}</div>
+      <Pic key={o} id={"je-pole-"+(o+1)} r="4/3" cap={"Pôle "+P[o][0]} cls="zoom"/>
+    </div></section>
+    <section><Head t="Comment une mission se déroule" prov/>
+      <Reveal className="steps">{[["Brief","Le client expose son besoin."],["Proposition","Offre et calendrier validés."],["Réalisation","Le pôle concerné produit."],["Livraison","Remise et suivi."]].map(([t,d])=><div key={t}><h3>{t}</h3><p className="sub" style={{fontSize:".9rem",marginTop:4}}>{d}</p></div>)}</Reveal>
+    </section>
+  </div>;
+}
+
+function Asso(){
+  const A=[["MIS","Association de la spécialité MIS","Rassemble les étudiants de la spécialité et ses diplômés autour d’échanges et de projets."],["Spécialité 2","Exemple d’association","Présentez ici la mission, les membres et les événements de l’association."],["Spécialité 3","Exemple d’association","Présentez ici la mission, les membres et les événements de l’association."]];
+  const [s,setS]=useState(0);
+  return <div className="page wrap">
+    <Head t="Associations de spécialité" s="Chaque spécialité a sa communauté. Sélectionnez-en une pour la découvrir." prov/>
+    <div className="row3">{A.map((a,i)=><Reveal key={a[0]} delay={i*70} as="button" className={"card zoom"+(s===i?" sel":"")+" "+["kb","kl","kb","kw"][i%4]} onClick={()=>setS(i)}><Pic id={"asso-"+(i+1)} cap={"Membres de "+a[0]} r="4/3"/><div className="tx"><h3>{a[0]}</h3><p className="sub" style={{fontSize:".9rem"}}>{a[1]}</p></div></Reveal>)}</div>
+    <div className="split" key={s} style={{marginTop:30,animation:"fade .4s ease both"}}><div className="box"><h3 style={{fontSize:"1.4rem"}}>{A[s][1]}</h3><p className="sub">{A[s][2]}</p><ul>{["Présentation et mission","Bureau et contacts","Événements à venir"].map(x=><li key={x}>{x}</li>)}</ul></div>
+      <Pic id={"asso-detail-"+(s+1)} r="16/10" cap={"Événement de "+A[s][0]}/></div>
+  </div>;
+}
+
+const ART={"2025-09-01":["À l’occasion de la rentrée, l’AEI STIC a adressé un message collectif à l’ensemble des élèves-ingénieurs de la filière.","Il met en avant la réussite, les découvertes, les opportunités et les projets qui attendent les étudiants au fil de l’année."],"2025-09-26":["Dans ce portrait, l’AEI STIC met en lumière le parcours d’un diplômé de la filière : Roméo Bomisso, diplômé MIS 2007 et aujourd’hui dirigeant dans le secteur des assurances.","Ce type de contenu aide les étudiants à se projeter dans leur future carrière et à découvrir les débouchés de la filière."],"2025-10-01":["« Focus sur la STIC » présente les spécialités de la filière, les matières enseignées et les débouchés associés.","Informatique, télécommunications et EIT : chaque domaine est expliqué avec des mots accessibles, pour aider les futurs étudiants et le grand public à comprendre la formation."],"2025-10-21":["L’AEI STIC met en valeur les UP-PRO, c’est-à-dire les projets d’étude, d’application et professionnels des élèves-ingénieurs STIC.","L’idée est de suivre ces projets de l’idée initiale jusqu’à la soutenance, et de faire connaître le travail des étudiants."],"2026-01-01":["Pour ouvrir l’année 2026, l’AEI STIC a partagé un message collectif de vœux.","Il évoque les opportunités, les projets et la réussite que chacun peut construire dans les mois à venir."],"2026-09-05":["La journée d’intégration de l’ESI était prévue le 5 septembre 2026 pour les nouveaux élèves-ingénieurs de première année et les techniciens supérieurs de première année.","Les élèves de deuxième année ingénieur et de TS2 participaient à l’organisation : protocole et accueil des invités, animation et sonorisation. Une cotisation de 1 000 FCFA par personne avait été indiquée.","Ce texte décrit le programme prévu. Il reste à le compléter avec le déroulé réel et les photos de la journée."],"2026-10-01":["En octobre 2026, l’AEI STIC s’associe à Octobre Rose pour sensibiliser au cancer du sein.","Le message rappelle l’importance de la prévention et du soutien aux personnes concernées."]};
+const Article=({e,L,onClose,onNav})=>{
+  const ref=useRef();
+  useEffect(()=>{const o=document.body.style.overflow;document.body.style.overflow="hidden";ref.current.focus();const k=ev=>{if(ev.key==="Escape")onClose()};addEventListener("keydown",k);return()=>{document.body.style.overflow=o;removeEventListener("keydown",k)}},[]);
+  const i=L.findIndex(x=>x[0]===e[0]),older=L[i+1],newer=L[i-1];
+  return ReactDOM.createPortal(<div className="ov" onClick={onClose}><article className="sheet" ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-label={e[2]} onClick={ev=>ev.stopPropagation()}>
+    <button className="x" onClick={onClose} aria-label="Fermer l’article">✕</button>
+    <Pic id={"act-"+e[0]} cap={e[5]} r="16/9"/>
+    <div className="meta"><span className="badge">{e[4]}</span><time>{e[1]}</time></div>
+    <h2>{e[2]}</h2>{ART[e[0]].map((p,j)=><p key={j}>{p}</p>)}
+    <span className="badge warm" style={{marginTop:22}}>Article provisoire à compléter</span>
+    <div className="nv">{older?<button className="btn" onClick={()=>onNav(older[0])}>Plus ancien : {older[2]}<Ar/></button>:<span/>}{newer?<button className="btn" onClick={()=>onNav(newer[0])}>Plus récent : {newer[2]}<Ar/></button>:<button className="btn p" onClick={onClose}>Retour aux activités<Ar/></button>}</div>
+  </article></div>,document.body);
+};
+
+function Activites(){
+  const E=[["2025-09-01","1er septembre 2025","Message de rentrée","Un message collectif autour de la réussite et des découvertes.","Communication","Visuel de rentrée"],["2025-09-26","26 septembre 2025","Portrait de Roméo Bomisso","Parcours d’un diplômé MIS 2007, dirigeant dans le secteur des assurances.","Communication","Portrait de l’invité"],["2025-10-01","1er octobre 2025","Focus sur la STIC","Présentation des spécialités, des matières et des débouchés de la filière.","Communication","Visuel Focus STIC"],["2025-10-21","21 octobre 2025","Mise en valeur des UP-PRO","Les projets d’étude, d’application et professionnels des élèves-ingénieurs.","Projets","Présentation d’un projet"],["2026-01-01","1er janvier 2026","Message de nouvelle année","Vœux collectifs autour des opportunités et des projets.","Communication","Visuel de vœux"],["2026-09-05","5 septembre 2026","Journée d’intégration ESI","Accueil des nouveaux élèves-ingénieurs et techniciens supérieurs de première année.","Événement","Photo de la journée"],["2026-10-01","Octobre 2026","Octobre Rose","Sensibilisation au cancer du sein, à la prévention et au soutien.","Sensibilisation","Visuel Octobre Rose"]];
+  const C=["Tous","Communication","Projets","Événement","Sensibilisation"];
+  const [f,setF]=useState("Tous");
+  const L=E.filter(e=>f==="Tous"||e[4]===f).reverse();
+  const [op,setOp]=useState(null);
+  return <div className="page wrap">
+    <Head t="Activités" s="Les temps forts de l’association, du plus récent au plus ancien."/>
+    <div className="tabs">{C.map(c=><button key={c} className={"tab"+(f===c?" on":"")} onClick={()=>setF(c)}>{c}</button>)}</div>
+    <div className="row3">{L.map((e,i)=><article className={"frame zoom "+["kb","kl","kb","kw"][i%4]} role="button" tabIndex={0} aria-label={"Lire l’article : "+e[2]} onClick={()=>setOp(e[0])} onKeyDown={ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();setOp(e[0])}}} key={e[0]+f} style={{animationDelay:i*60+"ms",cursor:"pointer"}}><Pic id={"act-"+e[0]} cap={e[5]} r="4/3"/><div className="tx"><time>{e[1]}</time><h3>{e[2]}</h3><p className="sub" style={{fontSize:".9rem"}}>{e[3]}</p><span className="badge" style={{marginTop:4}}>{e[4]}</span><span className="more">Lire l’article<i><Ic n="arr" s={14}/></i></span></div></article>)}</div>
+    {op&&<Article key={op} e={E.find(x=>x[0]===op)} L={L} onClose={()=>setOp(null)} onNav={setOp}/>}
+  </div>;
+}
+
+function Footer({go}){
+  const nop=e=>e.preventDefault();
+  return <footer><div className="wrap" style={{width:"min(1240px,100%)"}}><div className="foot">
+    <img className="lg" src={LOGO} alt="Logo AEI STIC"/>
+    <svg className="mo" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g stroke="#fff" strokeWidth="2" fill="none"><path d="M0 300H200L250 350H500"/><path d="M800 80H600L550 30H400"/><path d="M0 100H120L170 50"/><path d="M800 330H680L640 290"/></g></svg>
+    <div className="fg">
+      <div><h4>Contact</h4><ul><li><Ic n="pin" s={18}/>ESI, INP-HB, Yamoussoukro, Côte d’Ivoire</li><li><Ic n="phone" s={18}/>+225 00 00 00 00 00</li><li><Ic n="mail" s={18}/>contact@aeistic.exemple</li></ul>
+        <div className="soc">{[["fb","Facebook"],["ig","Instagram"],["in","LinkedIn"]].map(([i,l])=><a key={l} href="#" onClick={nop}><span style={{display:"flex",gap:10,alignItems:"center"}}><Ic n={i} s={16}/>{l}</span><Ic n="arr" s={14}/></a>)}<a href="https://linktr.ee/link.aeistic" target="_blank" rel="noopener"><span style={{display:"flex",gap:10,alignItems:"center"}}><Ic n="tree" s={16}/>Linktree</span><Ic n="arr" s={14}/></a></div></div>
+      <div className="fc"><h3>AEI STIC</h3><em>Projets, talents, créativité</em><div className="cta"><button className="btn g" onClick={()=>go("stic")}>Découvrir la STIC<Ar/></button><button className="btn o" onClick={()=>go("je")}>La Junior Entreprise</button></div></div>
+      <div><h4>Accès rapide</h4><div className="ql">{PAGES.map(([k,l])=><a key={k} href={"#"+k} onClick={e=>{e.preventDefault();go(k)}}>{l}</a>)}<a href="#" onClick={nop}>Contact</a></div></div>
+    </div>
+    <div className="fb"><span>Maquette v1 · coordonnées et liens d’exemple, photos à ajouter</span><div className="lp"><a href="#" onClick={nop}>Mentions légales</a><a href="#" onClick={nop}>Confidentialité</a><span>© 2026</span></div></div>
+  </div></div></footer>;
+}
+
+function App(){
+  const init=()=>{try{const h=location.hash.slice(1);return PAGES.some(p=>p[0]===h)?h:"accueil"}catch(e){return "accueil"}};
+  const [page,setPage]=useState(init);
+  const [cu,setCu]=useState("");
+  const go=k=>{if(k===page)return window.scrollTo({top:0,behavior:"smooth"});const sw=()=>{setPage(k);try{location.hash=k}catch(e){}window.scrollTo({top:0})};if(matchMedia("(prefers-reduced-motion: reduce)").matches)return sw();setCu("in");setTimeout(()=>{sw();setCu("out")},460);setTimeout(()=>setCu(""),1100)};
+  const pg=useRef();
+  useEffect(()=>{let cur=null;const on=e=>{const t=e.target;if(!t.closest)return;const s=t.closest(".card,.wcd,.frame,.pc,.gcard,.box,.acc,.steps>div");if(s){const r=s.getBoundingClientRect();s.style.setProperty("--mx",(e.clientX-r.left)+"px");s.style.setProperty("--my",(e.clientY-r.top)+"px")}const b=t.closest(".btn");if(cur&&cur!==b){cur.style.transform="";cur=null}if(b&&!matchMedia("(prefers-reduced-motion: reduce)").matches){const r=b.getBoundingClientRect();b.style.transform="translate("+((e.clientX-r.left-r.width/2)*.12).toFixed(1)+"px,"+((e.clientY-r.top-r.height/2)*.22).toFixed(1)+"px)";cur=b}};addEventListener("pointermove",on);return()=>removeEventListener("pointermove",on)},[]);
+  useEffect(()=>{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;let t=0;const run=()=>{t=0;const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;pg.current.style.transform="scaleX("+(h>0?y/h:0)+")";document.body.classList.toggle("sc",y>20);document.querySelectorAll("[data-par]").forEach(el=>{const r=el.parentElement.getBoundingClientRect();el.style.transform="translate3d(0,"+((r.top+r.height/2-innerHeight/2)*parseFloat(el.dataset.par)).toFixed(1)+"px,0)"})};const on=()=>{if(!t)t=requestAnimationFrame(run)};addEventListener("scroll",on,{passive:true});addEventListener("resize",on);const i=setTimeout(run,60);return()=>{removeEventListener("scroll",on);removeEventListener("resize",on);clearTimeout(i)}},[page]);
+  const V={accueil:<Home go={go}/>,stic:<Stic/>,je:<JE/>,asso:<Asso/>,activites:<Activites/>}[page];
+  return <><div className="prog" ref={pg}/><div className={"curtain "+cu} aria-hidden="true"><img src={LOGO} alt=""/></div><Nav page={page} go={go}/><main key={page}>{V}</main><Footer go={go}/></>;
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
