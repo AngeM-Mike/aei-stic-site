@@ -16,7 +16,10 @@ export function Footer({go,page}){
   const backToTop=()=>window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
 
   return <footer><div className="wrap footer-wrap"><div className="foot">
-    <img className="foot-watermark" src={LOGO} alt="" aria-hidden="true"/>
+    <div className="foot-identity">
+      <img src={LOGO} alt="Logo AEI STIC"/>
+      <div><b>AEI STIC</b><span>Association des élèves-ingénieurs de la filière STIC · ESI, INP-HB</span></div>
+    </div>
     <div className="foot-top">
       <section className="foot-column foot-newsletter" aria-labelledby="footer-news-title">
         <h2 id="footer-news-title">Restez informé</h2>
@@ -49,7 +52,7 @@ export function Footer({go,page}){
     </div>
     <div className="foot-bottom">
       <nav className="foot-nav" aria-label="Pied de page">{PAGES.map(([key,label])=><a key={key} href={"#"+key} className={page===key?"active":""} aria-current={page===key?"page":undefined} onClick={e=>{e.preventDefault();go(key)}}>{label}</a>)}</nav>
-      <div className="foot-legal"><a href="#" onClick={prevent}>Mentions légales</a><a href="#" onClick={prevent}>Confidentialité</a><span>© 2026 AEI STIC</span><button className="foot-up" type="button" onClick={backToTop} aria-label="Retour en haut">
+      <div className="foot-legal"><a href="#" onClick={prevent}>Mentions légales</a><a href="#" onClick={prevent}>Confidentialité</a><span>© 2026 AEI STIC · ESI, INP-HB. Tous droits réservés.</span><button className="foot-up" type="button" onClick={backToTop} aria-label="Retour en haut">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
       </button></div>
     </div>
