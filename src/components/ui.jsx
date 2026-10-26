@@ -11,8 +11,7 @@ export const Ar=()=><span className="ar"><Ic n="arr" s={16}/></span>;
 export const Pic=({id,cap,r,cls="",par,children})=>{
   const src=PHOTOS[id];
   return <div className={"pic "+cls+(src?" has":"")} style={r?{aspectRatio:r}:null} data-par={par}>
-    {src?<img src={src} alt={cap||""}/>:<><svg className="mo" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g stroke="#ee7f86" strokeWidth="2" fill="none" opacity=".5"><path d="M0 230H80L115 265H210"/><path d="M400 55H330L295 20"/><path d="M0 70H55L85 40"/><path d="M400 250H330L300 220"/></g><g fill="#ee7f86"><circle cx="210" cy="265" r="5"/><circle cx="295" cy="20" r="5"/><circle cx="85" cy="40" r="5"/><circle cx="300" cy="220" r="5"/></g></svg>
-    <div className="ph"><Ic n="cam" s={15}/><span>Photo{r?" "+r.replace("/",":"):""} · {cap}</span></div></>}
+    {src?<img src={src} alt={cap||""}/>:<svg className="mo" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g stroke="#4aa8ff" strokeWidth="2" fill="none" opacity=".5"><path d="M0 230H80L115 265H210"/><path d="M400 55H330L295 20"/><path d="M0 70H55L85 40"/><path d="M400 250H330L300 220"/></g><g fill="#4aa8ff"><circle cx="210" cy="265" r="5"/><circle cx="295" cy="20" r="5"/><circle cx="85" cy="40" r="5"/><circle cx="300" cy="220" r="5"/></g></svg>}
     {children}
   </div>;
 };
@@ -25,7 +24,7 @@ export function Reveal({children,className="",as:T="div",delay=0,...rest}){
 
 export function Count({to}){
   const [n,setN]=useState(0);const r=useRef();
-  useEffect(()=>{const io=new IntersectionObserver(([e])=>{if(!e.isIntersecting)return;io.disconnect();const t0=performance.now();const f=t=>{const p=Math.min((t-t0)/1100,1);setN(Math.round(to*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)});io.observe(r.current);return()=>io.disconnect()},[to]);
+  useEffect(()=>{if(matchMedia("(prefers-reduced-motion: reduce)").matches){setN(to);return;}const io=new IntersectionObserver(([e])=>{if(!e.isIntersecting)return;io.disconnect();const t0=performance.now();const f=t=>{const p=Math.min((t-t0)/1100,1);setN(Math.round(to*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)});io.observe(r.current);return()=>io.disconnect()},[to]);
   return <b ref={r}>{n}</b>;
 }
 
@@ -38,3 +37,19 @@ export const Statement=({t})=>{
 };
 
 export const Words=({t,d=0})=>t.split(" ").map((w,i,a)=><React.Fragment key={i}><span className="wd" style={{animationDelay:(d+i)*70+"ms"}}>{w}</span>{i<a.length-1?" ":""}</React.Fragment>);
+
+export function Typewriter({words,speed=70,erase=38,pause=1500}){
+  const [t,setT]=useState("");
+  useEffect(()=>{
+    if(matchMedia("(prefers-reduced-motion: reduce)").matches){setT(words[0]);return;}
+    let i=0,k=0,del=false,id;
+    const tick=()=>{
+      const w=words[i];
+      if(!del){k++;setT(w.slice(0,k));if(k===w.length){del=true;id=setTimeout(tick,pause);return;}id=setTimeout(tick,speed);}
+      else{k--;setT(w.slice(0,k));if(k===0){del=false;i=(i+1)%words.length;id=setTimeout(tick,350);return;}id=setTimeout(tick,erase);}
+    };
+    id=setTimeout(tick,600);
+    return()=>clearTimeout(id);
+  },[words]);
+  return <span className="tw" aria-hidden="true"><span className="tw-t">{t||"\u200b"}</span><span className="tw-c"/></span>;
+}

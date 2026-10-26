@@ -1,7 +1,10 @@
 import React,{useState,useEffect,useRef} from "react";
 import ReactDOM from "react-dom";
-import {Ic,Ar,Pic,Reveal,Count,Head,Statement,Words} from "../components/ui";
-import {PAGES,ECO,ART} from "../data";
+import ParticleField from "../components/ParticleField";
+import NewsTicker from "../components/NewsTicker";
+import {Ic,Ar,Pic,Reveal,Count,Head,Statement,Words,Typewriter} from "../components/ui";
+import {PAGES,ECO,ART,DOMAINS} from "../data";
+import {PHOTOS} from "../photos";
 import LOGO from "../assets/logo.webp";
 
 export function Home({go}){
@@ -12,6 +15,7 @@ export function Home({go}){
       <div className="txt">
         <span className="badge">ESI · INP-HB · Yamoussoukro</span>
         <h1><Words t="Des projets, des"/> <span className="mark"><Words t="talents" d={3}/></span> <Words t="et de la créativité à partager" d={4}/></h1>
+        <p className="tline" aria-label={"Ici, on parle de "+DOMAINS.join(", ")}>Ici, on parle de <Typewriter words={DOMAINS}/></p>
         <p className="sub">L’AEI STIC valorise ce que construisent les élèves-ingénieurs en Sciences et Technologies de l’Information et de la Communication.</p>
         <div className="cta"><button className="btn p" onClick={()=>go("stic")}>Découvrir la STIC<Ar/></button><button className="btn" onClick={()=>go("activites")}>Voir les activités<Ar/></button></div>
       </div>
@@ -27,12 +31,13 @@ export function Home({go}){
       <div className="stat"><Count to={3}/><span>axes : projets, talents, communication</span></div>
       <div className="stat"><Count to={4}/><span>pôles au sein de la JE Inova</span></div>
     </Reveal>
+    <Reveal className="news-reveal"><NewsTicker go={go}/></Reveal>
     <section><Statement t="L’AEI STIC fait rayonner les projets, les talents et la créativité des élèves-ingénieurs STIC, de l’idée initiale jusqu’à la soutenance."/></section>
-    <section style={{paddingTop:10}}><Head t="Notre écosystème" s="Les structures avec lesquelles l’AEI STIC avance." c/><div className="eco" aria-label="Notre écosystème"><div>{[0,1].map(k=><span key={k}>{ECO.map(([n,l,lg])=><div className="et" key={n}>{lg?<img src={LOGO} alt=""/>:null}<b>{n}</b><small>{l}</small></div>)}</span>)}</div></div></section>
+    <section style={{paddingTop:10}}><Head t="Notre écosystème" s="Les structures avec lesquelles l’AEI STIC avance." c/><div className="eco" tabIndex={0} aria-label="Notre écosystème"><div className="eco-track">{[0,1].map(k=><div className="eco-group" key={k} aria-hidden={k===1}>{ECO.map(([n,l,id],i)=>{const logo=PHOTOS["logo-"+id];return <div className={"et "+["kb","kl","kb","kw","kb","kl"][i%6]} key={id}>{logo?<img src={logo} alt={n}/>:<b>{n}</b>}<small>{l}</small></div>;})}</div>)}</div></div></section>
     <section><Reveal className="band">
       <Pic id="band" cap="Grande photo de groupe ou du campus, format paysage" r="16/9" cls="fill"/>
       <div><h2>Une communauté, plusieurs façons de s’engager</h2><p className="sub" style={{margin:"10px auto 0"}}>La filière, la Junior Entreprise et les associations de spécialité.</p></div>
-      <div className="wc">{W.map(([k,i,t,d],n)=><div className={"wcd "+["kl","kb","kw"][n]} key={k}><span className="ic"><Ic n={i} s={22}/></span><h3>{t}</h3><p className="sub" style={{fontSize:".9rem"}}>{d}</p><button className="btn p" onClick={()=>go(k)}>En savoir plus<Ar/></button></div>)}</div>
+      <div className="wc">{W.map(([k,i,t,d],n)=><div className={"wcd "+["kb","kl","kb","kw"][n%4]} key={k}><span className="ic"><Ic n={i} s={22}/></span><h3>{t}</h3><p className="sub" style={{fontSize:".9rem"}}>{d}</p><button className="btn p" onClick={()=>go(k)}>En savoir plus<Ar/></button></div>)}</div>
     </Reveal></section>
     <section><Reveal className="gcard">
       <Pic id="mission" r="4/5" par=".04" cap="Étudiants travaillant en équipe"><button className="play" aria-label="Lire la vidéo (exemple)"><Ic n="play" s={20} f/></button></Pic>
@@ -43,7 +48,7 @@ export function Home({go}){
     <section><Head t="Explorer le site" s="Quatre entrées pour tout comprendre." c/>
       <div className="row4">{N.map(([k,t,d,id,cap],i)=><Reveal key={k} delay={i*70} as="button" className="pc zoom" onClick={()=>go(k)}><Pic id={id} cap={cap} r="3/4"/><div className="lab"><div><small>{d}</small><b>{t}</b></div><i><Ic n="arr" s={16}/></i></div></Reveal>)}</div>
     </section>
-    <section><Reveal className="dcta"><div><h2>Suivez l’AEI STIC et découvrez les projets de la filière</h2><p>Publications, portraits, projets et temps forts : tout est sur nos réseaux.</p><div className="cta"><a className="btn g" href="https://linktr.ee/link.aeistic" target="_blank" rel="noopener">Ouvrir le Linktree<Ar/></a></div></div>
+    <section>    <Reveal className="dcta"><ParticleField color="255,255,255" density={9000} max={60}/><div><h2>Suivez l’AEI STIC et découvrez les projets de la filière</h2><p>Publications, portraits, projets et temps forts : tout est sur nos réseaux.</p><div className="cta"><a className="btn g" href="https://linktr.ee/link.aeistic" target="_blank" rel="noopener">Ouvrir le Linktree<Ar/></a></div></div>
       <div className="mc"><div><img src={LOGO} alt=""/><span>2026</span></div><div><span>Élève-ingénieur STIC</span><span>ESI · INP-HB</span></div></div></Reveal></section>
   </div>;
 }
